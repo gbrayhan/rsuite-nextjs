@@ -1,6 +1,6 @@
 import React from 'react';
 import { Panel, PanelProps } from 'rsuite';
-import Copyright from '@/components/Copyright';
+import Copyright from './Copyright';
 
 interface PageContentProps extends PanelProps {
   showCopyright?: boolean;

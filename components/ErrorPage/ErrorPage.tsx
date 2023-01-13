@@ -1,16 +1,25 @@
 import React from 'react';
-import * as errors from '@/images/errors';
+import errorsMap from '@/images/errors';
 
-const ErrorPage = ({ code = 404, children }) => (
-  <div className="error-page">
-    <div className="item">
-      <img src={errors[`Error${code}Img`]} />
-      <div className="text">
-        <h1 className="error-page-code">{code}</h1>
-        {children}
-      </div>
-    </div>
-  </div>
-);
+interface ErrorPageProps {
+    code?: number;
+    children?: React.ReactNode;
+}
 
+
+
+const ErrorPage: React.FC<ErrorPageProps> = ({ code = 404, children }) => {
+    const errorImg = errorsMap[`Error${code}Img`] || errorsMap.Error404Img;
+    return (
+        <div className="error-page">
+            <div className="item">
+                <img src={errorImg} alt={`${code}`} />
+                <div className="text">
+                    <h1 className="error-page-code">{code}</h1>
+                    {children}
+                </div>
+            </div>
+        </div>
+    );
+};
 export default ErrorPage;

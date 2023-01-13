@@ -23,7 +23,7 @@ import { VscCalendar } from 'react-icons/vsc';
 import { BsKanbanFill } from 'react-icons/bs';
 import { FaUsers } from 'react-icons/fa';
 import PlusIcon from '@rsuite/icons/Plus';
-import boards from '@/data/boards';
+import boards from '../../data/boards';
 
 const { getHeight, on } = DOMHelper;
 

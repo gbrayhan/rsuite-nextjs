@@ -21,8 +21,8 @@ import HeartIcon from '@rsuite/icons/legacy/HeartO';
 import SearchIcon from '@rsuite/icons/Search';
 import { MdOutlineNightlight, MdOutlineLightMode } from 'react-icons/md';
 
-const renderAdminSpeaker = ({ onClose, left, top, className }: any, ref) => {
-  const handleSelect = eventKey => {
+const renderAdminSpeaker = ({ onClose, left, top, className }: any, ref: any) => {
+  const handleSelect = (eventKey: any) => {
     onClose();
     console.log(eventKey);
   };
@@ -53,7 +53,8 @@ const renderAdminSpeaker = ({ onClose, left, top, className }: any, ref) => {
   );
 };
 
-const renderNoticeSpeaker = ({ onClose, left, top, className }: any, ref) => {
+
+const renderNoticeSpeaker = ({ onClose, left, top, className }: any, ref: any) => {
   const notifications = [
     [
       '7 hours ago',
