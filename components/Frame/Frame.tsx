@@ -23,18 +23,18 @@ import { VscCalendar } from 'react-icons/vsc';
 import { BsKanbanFill } from 'react-icons/bs';
 import { FaUsers } from 'react-icons/fa';
 import PlusIcon from '@rsuite/icons/Plus';
-import boards from '../../data/boards';
+import boards from '@/data/boards';
 
 const { getHeight, on } = DOMHelper;
 
-const NavItem = props => {
-  const { title, eventKey, ...rest } = props;
+function NavItem(props: any) {
+  const {title, eventKey, ...rest} = props;
   return (
-    <Nav.Item eventKey={eventKey} as={NavLink} {...rest}>
-      {title}
-    </Nav.Item>
+      <Nav.Item eventKey={eventKey} as={NavLink} {...rest}>
+        {title}
+      </Nav.Item>
   );
-};
+}
 
 export interface NavItemData {
   eventKey: string;
