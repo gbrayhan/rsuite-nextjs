@@ -4,7 +4,10 @@
     "paths": {
       "@/components/*": ["components/*"],
       "@/images/*": ["images/*"],
-      "@/data/*": ["data/*"]
+      "@/data/*": ["data/*"],
+      "@/const/*": ["const/*"],
+      "@/store/*": ["store/*"]
+
     },
     "baseUrl": ".",
     "lib": ["dom", "dom.iterable", "esnext"],
