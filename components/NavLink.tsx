@@ -1,15 +1,24 @@
 import React, { forwardRef } from 'react';
-import { NavLinkProps, NavLink as BaseNavLink } from 'react-router-dom';
+import Link, { LinkProps } from 'next/link';
+import { useRouter } from 'next/router';
 
-const NavLink = forwardRef((props: NavLinkProps, ref: React.Ref<HTMLAnchorElement>) => {
-    const { to, children, ...rest } = props;
+interface NavLinkProps extends LinkProps {
+    children: React.ReactNode;
+}
+
+const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>((props, ref) => {
+    const { href, children, ...rest } = props;
+    const router = useRouter();
+    const isActive = router.pathname === href;
+
     return (
-        <BaseNavLink ref={ref} to={to} {...rest} end>
-            {children}
-        </BaseNavLink>
+        <Link href={href} passHref legacyBehavior>
+            <a ref={ref} {...rest} className={isActive ? 'active' : ''}>
+                {children}
+            </a>
+        </Link>
     );
 });
 NavLink.displayName = 'NavLink';
-
 
 export default NavLink;

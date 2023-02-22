@@ -1,7 +1,7 @@
 import {GenericState} from "../types/reducers";
 
 export type UserInformation = {
-    name: string; email: string; id: number; role: string;
+    firstName: string; lastName: string; email: string; id: number; role: string;
 }
 
 export type UserActivity = {
@@ -9,8 +9,7 @@ export type UserActivity = {
 }
 
 export type UserAuth = {
-    token: string; refreshToken: string; timeDurationTokenMiliSeconds: number; generatedDateToken?: Date;
-    isAuthenticated: boolean;
+    token: string; refreshToken: string; timeDurationTokenMiliSeconds: number; generatedDateToken?: Date; isAuthenticated: boolean;
 }
 
 export interface UserState {

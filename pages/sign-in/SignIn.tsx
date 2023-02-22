@@ -1,50 +1,15 @@
 import React from 'react';
-import {Button, Divider, Form, IconButton, Panel, Schema, Stack} from 'rsuite';
+import {Button, Divider, Form, IconButton, Panel, Stack} from 'rsuite';
 import GithubIcon from '@rsuite/icons/legacy/Github';
 import FacebookIcon from '@rsuite/icons/legacy/Facebook';
 import GoogleIcon from '@rsuite/icons/legacy/Google';
 import WechatIcon from '@rsuite/icons/legacy/Wechat';
 import Brand from "../../components/Brand";
 import Link from "next/link"
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "@/store/store";
-import {ThunkDispatch} from "redux-thunk";
-import {AnyAction} from "@reduxjs/toolkit";
-
-const { StringType, NumberType } = Schema.Types;
-
-
-const model = Schema.Model({
-    email: StringType()
-        .isEmail('Please enter a valid email address.')
-        .isRequired('This field is required.'),
-    password: StringType().isRequired('This field is required.'),
-});
-
-interface FormValues {
-    email: string;
-    password: string;
-}
+import useSignIn, {FormValues, model} from "./hooks";
 
 const SignIn = () => {
-    const formRef = React.useRef<React.ElementRef<typeof Form>>(null);
-    const [formError, setFormError] = React.useState({});
-    const [formValue, setFormValue] = React.useState<FormValues>({
-        email: '',
-        password: '',
-    });
-    const dispatch = useDispatch<ThunkDispatch<RootState, unknown, AnyAction>>();
-    const userState = useSelector((state: RootState) => state.user);
-    const handleSubmit = () => {
-        debugger;
-        console.log("Here")
-        const resultCheck = formRef.current?.check();
-        if (!resultCheck) {
-            console.error('Form Error');
-            return;
-        }
-        console.log(formValue, 'Form Value');
-    };
+    const {formValue, setFormValue, formRef, handleSubmit} = useSignIn()
     return (
         <Stack
             justifyContent="center"
@@ -55,7 +20,6 @@ const SignIn = () => {
             }}
         >
             <Brand style={{marginBottom: 10}}/>
-
             <Panel bordered style={{background: '#fff', width: 400}} header={<h3>Sign In</h3>}>
                 <p style={{marginBottom: 10}}>
                     <span className="text-muted">New Here? </span>{' '}
@@ -65,7 +29,6 @@ const SignIn = () => {
                 <Form fluid
                       ref={formRef}
                       onChange={(value, event) => setFormValue(value as FormValues)}
-                      onCheck={setFormError}
                       formValue={formValue}
                       model={model}>
                     <Form.Group>

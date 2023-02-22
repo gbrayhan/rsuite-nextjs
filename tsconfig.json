@@ -6,7 +6,9 @@
       "@/images/*": ["images/*"],
       "@/data/*": ["data/*"],
       "@/const/*": ["const/*"],
-      "@/store/*": ["store/*"]
+      "@/store/*": ["store/*"],
+      "@/hooks/*": ["hooks/*"]
+
 
     },
     "baseUrl": ".",

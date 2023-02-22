@@ -9,8 +9,7 @@ const userSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action: PayloadAction<UserInformation>) => {
-            state.information.data.name = action.payload.name
-            state.information.data.email = action.payload.email
+            state.information.data = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -20,11 +19,14 @@ const userSlice = createSlice({
                 state.auth.status = "loading";
             })
             .addCase(login.fulfilled, (state, action) => {
+                debugger;
                 state.information.status = "finished";
                 state.auth.status = "finished";
-                state.information.data = action.payload.information.data;
-                state.auth.data.token = action.payload.auth.data.token;
-                state.auth.data.refreshToken = action.payload.auth.data.refreshToken;
+                state.information.data = action.payload.data;
+                state.auth.data.token = action.payload.security.jwtAccessToken;
+                state.auth.data.refreshToken = action.payload.security.jwtRefreshToken;
+                state.auth.data.isAuthenticated = true;
+                state.auth.data.generatedDateToken = new Date();
             })
             .addCase(login.rejected, (state, action) => {
                 state.auth.status = "error";

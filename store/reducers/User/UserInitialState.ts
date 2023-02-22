@@ -3,7 +3,8 @@ import {UserState} from "@/store/reducers/User/types";
 export const initialState: UserState = {
     information: {
         data: {
-            name: '',
+            firstName: '',
+            lastName: '',
             email: '',
             id: 0,
             role: '',

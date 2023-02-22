@@ -8,9 +8,10 @@ import {LoginResponseToEntityUserMapper} from "@/store/reducers/User/mappers";
 export const login = createAsyncThunk(
     "user/auth/login",
     async ({email, password}: { email: string, password: string }, thunkAPI) => {
+        debugger;
         try {
             const response: LoginResponse = await loginAPI(email, password);
-            return LoginResponseToEntityUserMapper(response);
+            return response;
         } catch (error) {
             return thunkAPI.rejectWithValue(error);
         }

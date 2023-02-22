@@ -1,0 +1,13 @@
+.BarGraphContainer {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 5rem;
+}
+
+.SecondSection {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 5rem;
+}
