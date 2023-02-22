@@ -1,5 +1,12 @@
 # Nextjs-Typescript-Boilerplate with Redux and ReduxToolkit Storage System, RSuite, and Nivo Graph Library
 
+[![issues](https://img.shields.io/github/issues/gbrayhan/rsuite-nextjs)](https://github.com/gbrayhan/rsuite-nextjs/tree/main/.github/ISSUE_TEMPLATE)
+[![forks](https://img.shields.io/github/forks/gbrayhan/rsuite-nextjs)](https://github.com/gbrayhan/rsuite-nextjs/network/members)
+[![stars](https://img.shields.io/github/stars/gbrayhan/rsuite-nextjs)](https://github.com/gbrayhan/rsuite-nextjs/stargazers)
+[![license](https://img.shields.io/github/license/gbrayhan/rsuite-nextjs)](https://github.com/gbrayhan/rsuite-nextjs/tree/master/LICENSE)
+[![CodeFactor](https://www.codefactor.io/repository/github/gbrayhan/rsuite-nextjs/badge)](https://www.codefactor.io/repository/github/gbrayhan/rsuite-nextjs)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/3ea0674b79b340fd8454d9061320b906)](https://www.codacy.com/gh/gbrayhan/rsuite-nextjs/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=gbrayhan/rsuite-nextjs&amp;utm_campaign=Badge_Grade)
+
 This boilerplate combines the best of Nextjs and Typescript technologies to provide you with a solid and easy-to-maintain project. It utilizes a Redux and ReduxToolkit-based data storage system that allows for efficient state management. Additionally, it incorporates the elegant and accessible RSuite design library for creating user interfaces. For data visualization, it features the powerful Nivo library, enabling you to generate high-quality charts and visualizations with ease. All of this is done while implementing best coding practices and keeping up-to-date with the latest library versions.
 
 
