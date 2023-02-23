@@ -11,7 +11,7 @@ const reHydrateStore = () => {
     let stringApplicationState: string | null = null;
     if (typeof window !== 'undefined') {
         stringApplicationState = localStorage.getItem(
-            "TaxApplicationStateLocal"
+            "NextApplication"
         );
     }
     const objectState = stringApplicationState
@@ -25,7 +25,7 @@ const reHydrateStore = () => {
         return JSON.parse(stringApplicationState ?? "");
     }
     if (typeof window !== 'undefined') {
-        localStorage.setItem("TaxApplicationStateLocal", "");
+        localStorage.setItem("NextApplication", "");
     }
     return undefined;
 };
@@ -35,7 +35,8 @@ const combinedReducer = combineReducers({
 });
 const rootReducer: Reducer = (state, action) => {
     switch (action.type) {
-        case "auth/logout":
+        case "logout":
+            debugger;
             // eslint-disable-next-line no-param-reassign
             state = undefined;
             break;

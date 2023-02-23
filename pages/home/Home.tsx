@@ -24,7 +24,6 @@ const Home = () => {
                     </div>
                     <div className={styles.SecondSection}>
                         <CustomPie/>
-
                         <CustomLine/>
                     </div>
                 </Content>

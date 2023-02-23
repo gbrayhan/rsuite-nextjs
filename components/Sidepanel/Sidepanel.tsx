@@ -5,6 +5,7 @@ import MagicIcon from '@rsuite/icons/legacy/Magic';
 import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
 import styles from "./Sidepanel.module.css"
 import React from "react";
+import {router} from "next/client";
 
 const Sidepanel = () => {
     const [expand, setExpand] = React.useState(true);
@@ -48,8 +49,12 @@ const Sidepanel = () => {
                             <Nav.Item eventKey="4-1">Applications</Nav.Item>
                             <Nav.Item eventKey="4-2">Websites</Nav.Item>
                             <Nav.Item eventKey="4-3">Channels</Nav.Item>
-                            <Nav.Item eventKey="4-4">Tags</Nav.Item>
                             <Nav.Item eventKey="4-5">Versions</Nav.Item>
+                            <Nav.Item onClick={() => {
+                                router.push('/logout').then(() => {
+                                })
+                            }} eventKey="4-4">Logout</Nav.Item>
+
                         </Nav.Menu>
                     </Nav>
                 </Sidenav.Body>

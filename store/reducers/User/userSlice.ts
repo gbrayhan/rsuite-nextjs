@@ -11,6 +11,10 @@ const userSlice = createSlice({
         setUser: (state, action: PayloadAction<UserInformation>) => {
             state.information.data = action.payload;
         },
+        logout: (state) => {
+            state.auth = initialState.auth;
+            state.information = initialState.information;
+        }
     },
     extraReducers: (builder) => {
         builder
@@ -26,7 +30,6 @@ const userSlice = createSlice({
                 state.auth.data.token = action.payload.security.jwtAccessToken;
                 state.auth.data.refreshToken = action.payload.security.jwtRefreshToken;
                 state.auth.data.isAuthenticated = true;
-                state.auth.data.generatedDateToken = new Date();
             })
             .addCase(login.rejected, (state, action) => {
                 state.auth.status = "error";
@@ -39,5 +42,5 @@ const userSlice = createSlice({
 
 })
 
-export const {setUser} = userSlice.actions
+export const {setUser, logout} = userSlice.actions
 export default userSlice.reducer
