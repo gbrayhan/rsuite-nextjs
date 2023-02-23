@@ -5,8 +5,8 @@ import {ThunkDispatch} from "redux-thunk";
 import {RootState} from "@/store/store";
 import {AnyAction} from "@reduxjs/toolkit";
 import {login} from "@/store/reducers/User/UserThunks";
-import {useRouter} from "next/router";
 import {UserState} from "@/store/reducers/User/types";
+import {useRouter} from "next/router";
 
 export const {StringType, NumberType} = Schema.Types;
 
@@ -24,7 +24,7 @@ export interface FormValues {
 
 
 const useSignIn = () => {
-    const router = useRouter()
+    const router = useRouter();
     const userState: UserState = useSelector((state: RootState) => state.user);
 
     useEffect(() => {

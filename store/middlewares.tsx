@@ -23,7 +23,6 @@ export const activityManager = ({dispatch, getState}: AppThunk) => (next: Dispat
 
     const dateNow = new Date();
 
-    debugger
     if (!action.type.includes("auth/setActionDataElement") && !action.type.includes("/pending")) {
         // dispatch(
         //   setActionDataElement({

@@ -36,7 +36,6 @@ const combinedReducer = combineReducers({
 const rootReducer: Reducer = (state, action) => {
     switch (action.type) {
         case "logout":
-            debugger;
             // eslint-disable-next-line no-param-reassign
             state = undefined;
             break;

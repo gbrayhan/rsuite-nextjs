@@ -13,7 +13,6 @@ export function loginAPI(email: string, password: string): Promise<LoginResponse
             "content-type": "application/json",
         },
     }).then((response: AxiosResponse<LoginResponse>) => {
-        console.log(response.data);
         return response.data;
     })
 

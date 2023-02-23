@@ -5,69 +5,77 @@ import MagicIcon from '@rsuite/icons/legacy/Magic';
 import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
 import styles from "./Sidepanel.module.css"
 import React from "react";
-import {router} from "next/client";
+import {useRouter} from "next/router";
 
-const Sidepanel = () => {
-    const [expand, setExpand] = React.useState(true);
-    // const [activeKey, setActiveKey] = React.useState('1');
-    return (
-        <Sidebar
-            className={styles.SidePanel}
-            width={expand ? 260 : 56}
-            collapsible
+type PropsSidePanel = {
+    activeKey: string,
+    setActiveKey: React.Dispatch<React.SetStateAction<string>>
+}
+
+const Sidepanel = ({activeKey, setActiveKey}: PropsSidePanel) => {
+    const [openKeys, setOpenKeys] = React.useState<string[]>(['4']);
+    const [expand, setExpand] = React.useState<boolean>(true);
+
+    const router = useRouter();
+
+    return (<Sidebar
+        className={styles.SidePanel}
+        width={expand ? 260 : 56}
+        collapsible
+    >
+        <Sidenav expanded={expand}
+                 style={{display: "flex", minHeight: "100vh"}}
+                 openKeys={openKeys}
+                 onOpenChange={setOpenKeys}
         >
-            <Sidenav expanded={expand} defaultOpenKeys={['3']}
-                     style={{display: "flex", minHeight: "100vh"}}>
-                <Sidenav.Body>
-                    <Nav>
-                        <Nav.Item eventKey="1" active icon={<DashboardIcon/>}>
-                            Dashboard
-                        </Nav.Item>
-                        <Nav.Item eventKey="2" icon={<GroupIcon/>}>
-                            User Group
-                        </Nav.Item>
-                        <Nav.Menu
-                            eventKey="3"
-                            trigger="hover"
-                            title="Advanced"
-                            icon={<MagicIcon/>}
-                            placement="rightStart"
-                        >
-                            <Nav.Item eventKey="3-1">Geo</Nav.Item>
-                            <Nav.Item eventKey="3-2">Devices</Nav.Item>
-                            <Nav.Item eventKey="3-3">Brand</Nav.Item>
-                            <Nav.Item eventKey="3-4">Loyalty</Nav.Item>
-                            <Nav.Item eventKey="3-5">Visit Depth</Nav.Item>
-                        </Nav.Menu>
-                        <Nav.Menu
-                            eventKey="4"
-                            trigger="hover"
-                            title="Settings"
-                            icon={<GearCircleIcon/>}
-                            placement="rightStart"
-                        >
-                            <Nav.Item eventKey="4-1">Applications</Nav.Item>
-                            <Nav.Item eventKey="4-2">Websites</Nav.Item>
-                            <Nav.Item eventKey="4-3">Channels</Nav.Item>
-                            <Nav.Item eventKey="4-5">Versions</Nav.Item>
-                            <Nav.Item onClick={() => {
-                                router.push('/logout').then(() => {
-                                })
-                            }} eventKey="4-4">Logout</Nav.Item>
+            <Sidenav.Body>
+                <Nav activeKey={activeKey} onSelect={setActiveKey}>
+                    <Nav.Item eventKey="dashboard" icon={<DashboardIcon/>}>
+                        Dashboard
+                    </Nav.Item>
+                    <Nav.Item eventKey="dhb" icon={<GroupIcon/>}>
+                        DHB
+                    </Nav.Item>
+                    <Nav.Menu
+                        eventKey="advanced"
+                        trigger="hover"
+                        title="Advanced"
+                        icon={<MagicIcon/>}
+                        placement="rightStart"
+                    >
+                        <Nav.Item eventKey="advancedGeo">Geo</Nav.Item>
+                        <Nav.Item eventKey="advancedDevices">Devices</Nav.Item>
+                        <Nav.Item eventKey="advancedBrand">Brand</Nav.Item>
+                        <Nav.Item eventKey="advancedLoyalty">Loyalty</Nav.Item>
+                        <Nav.Item eventKey="advancedVisitDepth">Visit Depth</Nav.Item>
+                    </Nav.Menu>
+                    <Nav.Menu
+                        eventKey="settings"
+                        trigger="hover"
+                        title="Settings"
+                        icon={<GearCircleIcon/>}
+                        placement="rightStart"
+                    >
+                        <Nav.Item eventKey="settingsApplications">Applications</Nav.Item>
+                        <Nav.Item eventKey="settingsWebsites">Websites</Nav.Item>
+                        <Nav.Item eventKey="settingsChannels">Channels</Nav.Item>
+                        <Nav.Item eventKey="settingsVersions">Versions</Nav.Item>
+                        <Nav.Item onClick={() => {
+                            router.push('/logout').then(() => {
+                            })
+                        }} eventKey="settingsLogout">Logout</Nav.Item>
+                    </Nav.Menu>
+                </Nav>
+            </Sidenav.Body>
+            <div style={{marginTop: "auto"}}>
+                <Sidenav.Toggle
+                    expanded={expand}
+                    onToggle={(expanded) => setExpand(expanded)}
+                />
+            </div>
+        </Sidenav>
 
-                        </Nav.Menu>
-                    </Nav>
-                </Sidenav.Body>
-                <div style={{marginTop: "auto"}}>
-                    <Sidenav.Toggle
-                        expanded={expand}
-                        onToggle={(expanded) => setExpand(expanded)}
-                    />
-                </div>
-            </Sidenav>
-
-        </Sidebar>
-    );
+    </Sidebar>);
 };
 
 

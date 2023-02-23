@@ -23,7 +23,6 @@ const userSlice = createSlice({
                 state.auth.status = "loading";
             })
             .addCase(login.fulfilled, (state, action) => {
-                debugger;
                 state.information.status = "finished";
                 state.auth.status = "finished";
                 state.information.data = action.payload.data;

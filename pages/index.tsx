@@ -1,11 +1,11 @@
-import {useRouter} from "next/router";
+import {useRouter} from 'next/router';
 import {useSelector} from "react-redux";
 import {RootState} from "@/store/store";
 import {useEffect} from "react";
 
-export default function Home() {
+export default function Main() {
     const user = useSelector((state: RootState) => state.user);
-    const router = useRouter()
+    const router = useRouter();
 
     useEffect(() => {
             if (user.information.data.isAuthenticated) {

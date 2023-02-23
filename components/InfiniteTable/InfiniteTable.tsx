@@ -76,3 +76,5 @@ const InfiniteTable = () => {
 
 
 }
+
+export default InfiniteTable;

@@ -6,7 +6,7 @@ import GoogleIcon from '@rsuite/icons/legacy/Google';
 import WechatIcon from '@rsuite/icons/legacy/Wechat';
 import Brand from "../../components/Brand";
 import Link from "next/link"
-import useSignIn, {FormValues, model} from "./hooks";
+import useSignIn, {FormValues, model} from "@/hooks/pages/sign-in/SignIn";
 
 const SignIn = () => {
     const {formValue, setFormValue, formRef, handleSubmit} = useSignIn()

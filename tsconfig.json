@@ -7,8 +7,8 @@
       "@/data/*": ["data/*"],
       "@/const/*": ["const/*"],
       "@/store/*": ["store/*"],
-      "@/hooks/*": ["hooks/*"]
-
+      "@/hooks/*": ["hooks/*"],
+      "@/containers/*": ["containers/*"]
 
     },
     "baseUrl": ".",
