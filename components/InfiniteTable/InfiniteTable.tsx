@@ -9,7 +9,8 @@ type Data = {
     index: number,
     texts: string,
     name: string,
-    age: string
+    age: string,
+    date: string,
 
 }
 const FixedLoader = () => (<Loader
@@ -19,7 +20,7 @@ const FixedLoader = () => (<Loader
         justifyContent: 'center',
         position: 'absolute',
         background: '#f5f5f5',
-        width: '500px',
+        width: '700px',
         padding: '4px 0'
     }}
 />);
@@ -30,12 +31,13 @@ const fetchData = (start: number, length: number): Data[] =>
             index: start + index,
             texts: faker.lorem.paragraph(1),
             name: faker.name.firstName(),
-            age: faker.random.numeric(2)
+            age: faker.random.numeric(2),
+            date: faker.date.past(1, new Date()).toISOString()
         }
         return itemData;
     });
 
-const tableHeight = 400;
+const tableHeight = 600;
 
 
 const InfiniteTable = () => {
@@ -47,8 +49,8 @@ const InfiniteTable = () => {
     const getData = (prevData: Data[], sortColumnParam?: keyof Data, sortTypeParam?: SortType): Data[] => {
         if (sortColumnParam && sortTypeParam) {
             return prevData.sort((a: Data, b: Data) => {
-                let x: string | number = a[sortColumnParam];
-                let y: string | number = b[sortColumnParam];
+                let x: string | number | Date = a[sortColumnParam];
+                let y: string | number | Date = b[sortColumnParam];
 
                 if (sortTypeParam === 'asc') {
                     if (typeof x === "string" && typeof y === "string") {
@@ -100,7 +102,7 @@ const InfiniteTable = () => {
         }
     };
 
-    return (<div style={{width: "500px", display: "block"}}>
+    return (<div style={{width: "700px", display: "block"}}>
         <Table
             virtualized
             shouldUpdateScroll={false}
@@ -128,6 +130,10 @@ const InfiniteTable = () => {
             <Column width={100} sortable>
                 <HeaderCell>Age</HeaderCell>
                 <Cell dataKey="age"/>
+            </Column>
+            <Column width={200} sortable>
+                <HeaderCell>Date</HeaderCell>
+                <Cell dataKey="date"/>
             </Column>
         </Table>
         {loading && <FixedLoader/>}
