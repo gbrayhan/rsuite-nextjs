@@ -1,5 +1,5 @@
 import {Container, Content} from "rsuite";
-import styles from "../../pages/home/Home.module.css";
+import styles from "./Home.module.css";
 import CustomBar from "@/components/Dashboard/CustomBar";
 import CustomPie from "@/components/Dashboard/CustomPie";
 import CustomLine from "@/components/Dashboard/CustomLine";
@@ -20,6 +20,7 @@ const Dashboard = () => {
                 </div>
             </Content>
         </Container>
-    )
-}
+    );
+};
+
 export default Dashboard;
