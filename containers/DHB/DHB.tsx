@@ -2,7 +2,7 @@ import {Container, Content} from "rsuite";
 import styles from "./DHB.module.css";
 import React from "react";
 import TitleContainer from "@/components/TitleContainer";
-import InfiniteTable from "@/components/InfiniteTable";
+import CustomTable from "./CustomTable"
 
 const DHB = () => {
     return (
@@ -10,7 +10,7 @@ const DHB = () => {
             <TitleContainer title="Derechohabientes"/>
             <Content style={{margin: "1rem"}}>
                 <div className={styles.InfinityTableContainer}>
-                    <InfiniteTable/>
+                    <CustomTable/>
                 </div>
             </Content>
         </Container>

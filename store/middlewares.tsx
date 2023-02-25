@@ -7,7 +7,6 @@ import {AppThunk} from "@/store/store";
 
 export const rtkErrorNotification: Middleware = (api: MiddlewareAPI) => (next) => (action) => {
     if (isRejectedWithValue(action)) {
-        // console.warn('We got a rejected action!')
         toaster.push(<Notification>{action.payload?.response?.data?.message || "some error"}</Notification>, {
             placement: 'topEnd',
         });
