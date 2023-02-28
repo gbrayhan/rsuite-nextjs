@@ -14,14 +14,17 @@ const containers: ContainerMap = {
     dhb: DHB
 }
 
-export const renderContainer = (containerSelected: string): JSX.Element => {
-    if (containers[containerSelected] === undefined) return <div></div>;
-    return containers[containerSelected]();
-}
 
 const Home = () => {
     const [activeKey, setActiveKey] = React.useState<string>('dashboard');
     const {userState} = useIsAuth();
+
+    const renderContainer = React.useCallback((containerSelected: string): JSX.Element => {
+        const ContainerComponent = containers[containerSelected];
+        if (!ContainerComponent) return <div></div>;
+        return <ContainerComponent />;
+    }, []);
+
 
     return (<div className="show-fake-browser sidebar-page">
         <Container>

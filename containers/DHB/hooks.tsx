@@ -1,25 +1,15 @@
-import {Checkbox, Loader, Table} from "rsuite";
-import {faker} from "@faker-js/faker";
 import React from "react";
+import {Table} from "rsuite";
+import {faker} from "@faker-js/faker";
 import {SortType} from "rsuite-table";
-import {Data, NativeCellProps} from "./Types";
+import {DataDHB} from "./CustomTable/Types";
+
 const {Cell} = Table;
 export const tableHeight = 750;
 
-export const FixedLoader = () => (<Loader
-    content="Loading..."
-    style={{
-        display: 'flex',
-        justifyContent: 'center',
-        position: 'absolute',
-        background: '#f5f5f5',
-        width: '100%',
-        padding: '4px 0'
-    }}
-/>);
 
-export const fetchData = (start: number, length: number): Data[] => Array.from({length}).map((_, index) => {
-    const itemData: Data = {
+export const fetchData = (start: number, length: number): DataDHB[] => Array.from({length}).map((_, index) => {
+    const itemData: DataDHB = {
         index: start + index,
         texts: faker.lorem.paragraph(1),
         name: faker.name.firstName(),
@@ -34,39 +24,10 @@ export const fetchData = (start: number, length: number): Data[] => Array.from({
     return itemData;
 });
 
-export type CheckCellProps<T> = {
-    rowData?: T, onChange: (value: number, checked: boolean) => void, checkedKeys: number[], dataKey: keyof T, props?: NativeCellProps
-}
-export const CheckCell = ({
-                              rowData = {
-                                  index: 0,
-                                  texts: '',
-                                  name: '',
-                                  age: 0,
-                                  registeredDate: '',
-                                  items: 0,
-                                  orders: 0,
-                                  lastOrderDate: '',
-                                  quantity: 0,
-                                  company: ''
-                              }, onChange, checkedKeys, dataKey, ...props
-                          }: CheckCellProps<Data>) => (<Cell {...props} style={{padding: 0}}>
-    <div style={{lineHeight: '46px'}}>
-        <Checkbox
-            value={rowData[dataKey]}
-            inline
-            onChange={(value, checked, event) => {
-                onChange(Number(value), checked)
-            }}
-            checked={checkedKeys.some(item => item === rowData[dataKey])}
-        />
-    </div>
-</Cell>);
 
-
-const useCustomTable = () => {
-    const [data, setData] = React.useState<Data[]>(fetchData(0, 50));
-    const [sortColumn, setSortColumn] = React.useState<keyof Data>();
+const useDHB = () => {
+    const [data, setData] = React.useState<DataDHB[]>([]);
+    const [sortColumn, setSortColumn] = React.useState<keyof DataDHB>();
     const [sortType, setSortType] = React.useState<SortType>();
     const [loading, setLoading] = React.useState(false);
     const [checkedKeys, setCheckedKeys] = React.useState<number[]>([]);
@@ -74,9 +35,15 @@ const useCustomTable = () => {
     let indeterminate = false;
 
 
-    const getData = (prevData: Data[], sortColumnParam?: keyof Data, sortTypeParam?: SortType): Data[] => {
+    React.useEffect(() => {
+        setData(fetchData(0, 50));
+    }, []);
+
+
+
+    const getData = (prevData: DataDHB[], sortColumnParam?: keyof DataDHB, sortTypeParam?: SortType): DataDHB[] => {
         if (sortColumnParam && sortTypeParam) {
-            return prevData.sort((a: Data, b: Data) => {
+            return prevData.sort((a: DataDHB, b: DataDHB) => {
                 let x: string | number | Date = a[sortColumnParam];
                 let y: string | number | Date = b[sortColumnParam];
 
@@ -99,7 +66,7 @@ const useCustomTable = () => {
         return prevData;
     };
 
-    const loadMore = (sortColumnParam?: keyof Data, sortTypeParam?: SortType) => {
+    const loadMore = (sortColumnParam?: keyof DataDHB, sortTypeParam?: SortType) => {
         setLoading(true);
         setTimeout(() => {
             setData(getData([...data, ...fetchData(data.length, 50)], sortColumnParam || sortColumn, sortTypeParam || sortType));
@@ -107,7 +74,7 @@ const useCustomTable = () => {
         }, 500);
     };
 
-    const handleSortColumn = (sortColumnParam: keyof Data, sortTypeParam: SortType) => {
+    const handleSortColumn = (sortColumnParam: keyof DataDHB, sortTypeParam: SortType) => {
         setLoading(true);
         setTimeout(() => {
             setLoading(false);
@@ -134,7 +101,7 @@ const useCustomTable = () => {
         indeterminate = true;
     }
 
-    const handleCheckAll = (value: number, checked: boolean) => {
+    const handleCheckAll = (checked: boolean) => {
         const keys = checked ? data.map(item => item.index) : [];
         setCheckedKeys(keys);
     };
@@ -159,4 +126,4 @@ const useCustomTable = () => {
 }
 
 
-export default useCustomTable;
+export default useDHB;

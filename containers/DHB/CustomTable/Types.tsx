@@ -1,13 +1,13 @@
 import {RowDataType} from "rsuite-table/src/@types/common";
 import React from "react";
 
-export type Data = {
+export type DataDHB = {
     index: number, texts: string, name: string, age: number, items: number, registeredDate: string, orders: number, quantity: number, lastOrderDate: string, company: string
 }
 
 
 export type ColumnDefinition<T> = {
-    width: number; sortable?: boolean; resizable?: boolean; fullText?: boolean;
+    width: number; sortable?: boolean; resizable?: boolean; fullText?: boolean; fixed?: boolean | 'left' | 'right';
 
     header: string; dataKey: keyof T; flexGrow?: number;
 };

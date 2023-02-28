@@ -1,19 +1,21 @@
-import {ColumnDefinition, Data} from "./Types";
+import {ColumnDefinition, DataDHB} from "./CustomTable/Types";
 
-export const columnsCustomTable: ColumnDefinition<Data>[] = [
+export const columnsCustomTable: ColumnDefinition<DataDHB>[] = [
     {
         width: 100,
         sortable: true,
         resizable: true,
         header: 'Index',
-        dataKey: 'index'
+        dataKey: 'index',
+        fixed: "left"
     },
     {
         width: 100,
         sortable: true,
         resizable: true,
         header: 'Name',
-        dataKey: 'name'
+        dataKey: 'name',
+        fixed: "left"
     },
     {
         width: 150,
