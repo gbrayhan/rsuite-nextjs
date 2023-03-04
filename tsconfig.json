@@ -8,7 +8,9 @@
       "@/const/*": ["const/*"],
       "@/store/*": ["store/*"],
       "@/hooks/*": ["hooks/*"],
-      "@/containers/*": ["containers/*"]
+      "@/containers/*": ["containers/*"],
+      "@/layouts/*": ["layouts/*"]
+
 
     },
     "baseUrl": ".",

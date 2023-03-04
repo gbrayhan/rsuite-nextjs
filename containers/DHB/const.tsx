@@ -1,4 +1,5 @@
-import {ColumnDefinition, DataDHB} from "./CustomTable/Types";
+import {ColumnDefinition} from "../../layouts/CustomTable/Types";
+import {DataDHB} from "./types";
 
 export const columnsCustomTable: ColumnDefinition<DataDHB>[] = [
     {

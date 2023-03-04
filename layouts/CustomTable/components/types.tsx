@@ -1,4 +1,4 @@
-import { NativeCellProps} from "@/containers/DHB/CustomTable/Types";
+import { NativeCellProps} from "../types";
 
 export type ActionCellProps<T> = {
     rowData?: T; dataKey: keyof T; props?: NativeCellProps;

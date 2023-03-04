@@ -1,4 +1,4 @@
-import {NativeCellProps} from "@/containers/DHB/CustomTable/Types";
+import {NativeCellProps} from "../types";
 import {Checkbox} from "rsuite";
 import React from "react";
 import {Cell} from "rsuite-table";
@@ -6,7 +6,7 @@ import {ValueType} from "rsuite/Checkbox";
 
 
 export type CheckCellProps<T> = {
-    rowData?: T, onChange: (value: number, checked: boolean) => void, checkedKeys: number[], dataKey: keyof T, props?: NativeCellProps
+    rowData?: T, onChange: (value: number, checked: boolean) => void, checkedKeys: Array<string | number>, dataKey: keyof T, props?: NativeCellProps
 }
 export const CheckCell = <T extends object>({
                                                 rowData, onChange, checkedKeys, dataKey, ...props
