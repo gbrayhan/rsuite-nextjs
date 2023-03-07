@@ -1,16 +1,18 @@
 import React from "react";
 import {SortType} from "rsuite-table";
-import {ObjDataTable} from "@/layouts/CustomTable/types";
+import {ColumnDefinition, ObjDataTable} from "@/layouts/CustomTable/types";
 import {HookCustomTable} from "./types";
 
 export const tableHeight = 750;
 
-const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit: number) => T[], indexTable: keyof T): HookCustomTable<T> => {
+const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit: number) => T[], indexTable: keyof T, columnsCustomTable: ColumnDefinition<T>[]): HookCustomTable<T> => {
     const [data, setData] = React.useState<T[]>([]);
     const [sortColumn, setSortColumn] = React.useState<keyof T>(indexTable);
     const [sortType, setSortType] = React.useState<SortType>("desc");
     const [loading, setLoading] = React.useState(false);
     const [checkedKeys, setCheckedKeys] = React.useState<Array<string | number>>([]);
+    const [checkedColumnsHide, setCheckedColumnsHide] = React.useState<Array<string>>(columnsCustomTable.map((item: ColumnDefinition<T>, index) => { return item.dataKey as string }));
+
     let checked = false;
     let indeterminate = false;
 
@@ -103,7 +105,9 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
         indeterminate,
         handleCheckAll,
         handleCheck,
-        checkedKeys
+        checkedKeys,
+        checkedColumnsHide,
+        setCheckedColumnsHide
     }
 }
 

@@ -3,16 +3,26 @@ import styles from "./BarTable.module.css";
 import {ButtonToolbar, Checkbox, CheckboxGroup, IconButton, Input, InputGroup, Popover, Whisper} from "rsuite";
 import SearchIcon from '@rsuite/icons/Search';
 import SettingIcon from '@rsuite/icons/Setting';
-import {ColumnDefinition} from "../../Types";
+import {ColumnDefinition} from "../../types";
 
 
 export type PropsColumnsHide<T> = {
     columnsCustomTable: ColumnDefinition<T>[]
+    checkedColumnsHide: Array<string>
+    setCheckedColumnsHide: (value: Array<string>) => void
+
 }
-const ColumnsHide = <T extends object>({columnsCustomTable}: PropsColumnsHide<T>): React.ReactElement => {
+const ColumnsHide = <T extends object>({
+                                           columnsCustomTable,
+                                           checkedColumnsHide,
+                                           setCheckedColumnsHide
+                                       }: PropsColumnsHide<T>): React.ReactElement => {
+    const handleChange = (value: Array<string>) => setCheckedColumnsHide(value);
+
     return (
         <Popover title="Title">
-            <CheckboxGroup name="checkboxList" style={{width: "15rem"}}>
+            <CheckboxGroup onChange={(value, event) => handleChange(value as Array<string>)} value={checkedColumnsHide}
+                           name="checkboxList" style={{width: "15rem"}}>
                 {columnsCustomTable.map((item: ColumnDefinition<T>, index) => {
                     return (
                         <Checkbox key={index} value={item.dataKey as string}>{item.header}</Checkbox>
@@ -26,9 +36,15 @@ const ColumnsHide = <T extends object>({columnsCustomTable}: PropsColumnsHide<T>
 
 export type PropsBarTable<T> = {
     columnsCustomTable: ColumnDefinition<T>[]
+    checkedColumnsHide: Array<string>
+    setCheckedColumnsHide: (value: Array<string>) => void
 }
 
-const BarTable = <T extends object>({columnsCustomTable}: PropsBarTable<T>) => {
+const BarTable = <T extends object>({
+                                        columnsCustomTable,
+                                        checkedColumnsHide,
+                                        setCheckedColumnsHide
+                                    }: PropsBarTable<T>) => {
     return (
         <div className={styles.BarTableContainer}>
 
@@ -44,7 +60,7 @@ const BarTable = <T extends object>({columnsCustomTable}: PropsBarTable<T>) => {
             <div className={styles.RightContainer}>
                 <ButtonToolbar className={styles.BarIconGroup}>
                     <Whisper placement="autoVerticalEnd" trigger="click" controlId="control-id-settings"
-                             speaker={ColumnsHide<T>({columnsCustomTable})}>
+                             speaker={ColumnsHide<T>({columnsCustomTable, checkedColumnsHide, setCheckedColumnsHide})}>
                         <IconButton icon={<SettingIcon style={{fontSize: "2rem"}}/>}/>
                     </Whisper>
                     {/*<Whisper placement="autoVerticalEnd" trigger="click" controlId="control-id-columns"

@@ -12,4 +12,6 @@ export interface HookCustomTable<T> {
     handleSortColumn: (sortColumnParam: keyof T, sortTypeParam: SortType) => void;
     handleCheckAll: (checked: boolean) => void;
     handleCheck: (value: string | number, checked: boolean) => void;
+    checkedColumnsHide: Array<string>
+    setCheckedColumnsHide: (value: Array<string>) => void
 }

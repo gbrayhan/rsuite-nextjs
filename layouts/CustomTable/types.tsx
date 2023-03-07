@@ -23,4 +23,6 @@ export type NativeCellProps = {
 
 export type CustomTableProps<T> = {
     indexKey: keyof T; data: T[]; tableHeight?: number; columnsCustomTable: ColumnDefinition<T>[]; loading: boolean; checkedKeys: Array<string | number>; handleCheck: (value: number | string, checked: boolean) => void; handleCheckAll: (checked: boolean) => void; handleSortColumn: (dataKey: keyof T, sortType: SortType) => void; handleScroll: (x: number, y: number) => void; sortColumn?: keyof T; sortType?: SortType; checked: boolean; indeterminate: boolean;
+    checkedColumnsHide: Array<string>
+    setCheckedColumnsHide: (value: Array<string>) => void
 }

@@ -20,8 +20,11 @@ const DHB = () => {
         handleSortColumn,
         sortColumn,
         sortType,
-        handleScroll
-    } = useCustomTable(fetchData, "index");
+        handleScroll,
+        checkedColumnsHide,
+        setCheckedColumnsHide
+    } = useCustomTable(fetchData, "index", columnsCustomTable);
+
 
     return (<Container>
         <TitleContainer title="Derechohabientes"/>
@@ -32,7 +35,7 @@ const DHB = () => {
                     checked={checked}
                     indeterminate={indeterminate} handleCheck={handleCheck} handleCheckAll={handleCheckAll}
                     handleSortColumn={handleSortColumn} sortColumn={sortColumn} sortType={sortType}
-                    handleScroll={handleScroll} columnsCustomTable={columnsCustomTable}/>
+                    handleScroll={handleScroll} columnsCustomTable={columnsCustomTable} checkedColumnsHide={checkedColumnsHide} setCheckedColumnsHide={setCheckedColumnsHide}/>
             </div>
         </Content>
     </Container>)

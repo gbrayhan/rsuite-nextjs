@@ -25,11 +25,14 @@ const CustomTable = <T extends ObjDataTable>({
                                                  indeterminate,
                                                  columnsCustomTable,
                                                  tableHeight,
+                                                 checkedColumnsHide,
+                                                 setCheckedColumnsHide
                                              }: CustomTableProps<T>) => {
 
 
     return (<div>
-        <BarTable<T> columnsCustomTable={columnsCustomTable}/>
+        <BarTable<T> columnsCustomTable={columnsCustomTable} checkedColumnsHide={checkedColumnsHide}
+                     setCheckedColumnsHide={setCheckedColumnsHide}/>
         <Table
             virtualized
             shouldUpdateScroll={false}
@@ -60,17 +63,20 @@ const CustomTable = <T extends ObjDataTable>({
                 <CheckCell<T> dataKey={indexKey} checkedKeys={checkedKeys} onChange={handleCheck}/>
             </Column>
 
-            {columnsCustomTable.map((column: ColumnDefinition<T>, index: number) => (<Column
-                key={index}
-                width={column.width}
-                flexGrow={column.flexGrow}
-                resizable={column.resizable}
-                sortable={column.sortable}
-                fixed={column.fixed}
-            >
-                <HeaderCell>{column.header}</HeaderCell>
-                <Cell dataKey={column.dataKey as string}/>
-            </Column>))}
+            {columnsCustomTable.map((column: ColumnDefinition<T>, index: number) => {
+                return (checkedColumnsHide.includes(String(column.dataKey)) && <Column
+                    key={index}
+                    width={column.width}
+                    flexGrow={column.flexGrow}
+                    resizable={column.resizable}
+                    sortable={column.sortable}
+                    fixed={column.fixed}
+
+                >
+                    <HeaderCell>{column.header}</HeaderCell>
+                    <Cell dataKey={column.dataKey as string}/>
+                </Column>);
+            })}
 
             <Column width={70} fixed={"right"}>
                 <HeaderCell>
