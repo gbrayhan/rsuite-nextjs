@@ -19,7 +19,7 @@ const SignIn = (): React.ReactElement => {
               height: '100vh'
             }}
         >
-            <Brand style={{ marginBottom: 10 }}/>
+            <Brand/>
             <Panel bordered style={{ background: '#fff', width: 400 }} header={<h3>Sign In</h3>}>
                 <p style={{ marginBottom: 10 }}>
                     <span className="text-muted">New Here? </span>{' '}
