@@ -41,19 +41,24 @@ export interface PropsBarTable<T> {
   columnsCustomTable: Array<ColumnDefinition<T>>
   checkedColumnsHide: string[]
   setCheckedColumnsHide: (value: string[]) => void
+  searchBar: string
+  handleOnSearchBar: (value: string) => void
+
 }
 
 const BarTable = <T extends object>({
   columnsCustomTable,
   checkedColumnsHide,
-  setCheckedColumnsHide
+  setCheckedColumnsHide,
+  searchBar,
+  handleOnSearchBar
 }: PropsBarTable<T>): React.ReactElement => {
   return (
         <div className={styles.BarTableContainer}>
 
             <div className={styles.LeftContainer}>
                 <InputGroup className={styles.SearchBar}>
-                    <Input/>
+                    <Input value={searchBar} onChange={handleOnSearchBar} />
                     <InputGroup.Button>
                         <SearchIcon/>
                     </InputGroup.Button>

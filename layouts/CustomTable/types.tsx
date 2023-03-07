@@ -62,4 +62,6 @@ export interface CustomTableProps<T> {
   indeterminate: boolean
   checkedColumnsHide: string[]
   setCheckedColumnsHide: (value: string[]) => void
+  searchBar: string
+  handleOnSearchBar: (value: string) => void
 }

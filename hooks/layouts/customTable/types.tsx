@@ -14,4 +14,7 @@ export interface HookCustomTable<T> {
   handleCheck: (value: string | number, checked: boolean) => void
   checkedColumnsHide: string[]
   setCheckedColumnsHide: (value: string[]) => void
+  searchBar: string
+  setSearchBar: (value: string) => void
+  handleOnSearchBar: (searchBarParam: string) => void
 }

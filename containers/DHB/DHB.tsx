@@ -22,7 +22,9 @@ const DHB = (): React.ReactElement => {
     sortType,
     handleScroll,
     checkedColumnsHide,
-    setCheckedColumnsHide
+    setCheckedColumnsHide,
+    searchBar,
+    handleOnSearchBar
   } = useCustomTable<DataDHB>(fetchData, 'index', columnsCustomTable)
 
   return (<Container>
@@ -34,7 +36,9 @@ const DHB = (): React.ReactElement => {
                     checked={checked}
                     indeterminate={indeterminate} handleCheck={handleCheck} handleCheckAll={handleCheckAll}
                     handleSortColumn={handleSortColumn} sortColumn={sortColumn} sortType={sortType}
-                    handleScroll={handleScroll} columnsCustomTable={columnsCustomTable} checkedColumnsHide={checkedColumnsHide} setCheckedColumnsHide={setCheckedColumnsHide}/>
+                    handleScroll={handleScroll} columnsCustomTable={columnsCustomTable}
+                    checkedColumnsHide={checkedColumnsHide} setCheckedColumnsHide={setCheckedColumnsHide}
+                    searchBar={searchBar} handleOnSearchBar={handleOnSearchBar}/>
             </div>
         </Content>
     </Container>)

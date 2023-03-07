@@ -26,11 +26,13 @@ const CustomTable = <T extends ObjDataTable>({
   columnsCustomTable,
   tableHeight,
   checkedColumnsHide,
-  setCheckedColumnsHide
+  setCheckedColumnsHide,
+  searchBar,
+  handleOnSearchBar
 }: CustomTableProps<T>): React.ReactElement => {
   return (<div>
         <BarTable<T> columnsCustomTable={columnsCustomTable} checkedColumnsHide={checkedColumnsHide}
-                     setCheckedColumnsHide={setCheckedColumnsHide}/>
+                     setCheckedColumnsHide={setCheckedColumnsHide} searchBar={searchBar} handleOnSearchBar={handleOnSearchBar} />
         <Table
             virtualized
             shouldUpdateScroll={false}
@@ -72,7 +74,9 @@ const CustomTable = <T extends ObjDataTable>({
 
                 >
                     <HeaderCell>{column.header}</HeaderCell>
-                    <Cell dataKey={column.dataKey as string}/>
+                    <Cell dataKey={column.dataKey as string}>
+                        {(rowData) => <>{rowData[column.dataKey as string]}</>}
+                    </Cell>
                 </Column>)
             })}
 

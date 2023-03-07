@@ -5,7 +5,7 @@ import { type HookCustomTable } from './types'
 
 export const tableHeight = 750
 
-const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit: number) => T[], indexTable: keyof T, columnsCustomTable: Array<ColumnDefinition<T>>): HookCustomTable<T> => {
+const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit: number, sortColumnParam?: keyof T, sortTypeParam?: SortType, searchBar?: string) => T[], indexTable: keyof T, columnsCustomTable: Array<ColumnDefinition<T>>): HookCustomTable<T> => {
   const [data, setData] = React.useState<T[]>([])
   const [sortColumn, setSortColumn] = React.useState<keyof T>(indexTable)
   const [sortType, setSortType] = React.useState<SortType>('desc')
@@ -14,6 +14,7 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
   const [checkedColumnsHide, setCheckedColumnsHide] = React.useState<string[]>(columnsCustomTable.map((item: ColumnDefinition<T>, index) => {
     return item.dataKey as string
   }))
+  const [searchBar, setSearchBar] = React.useState<string>('')
 
   let checked = false
   let indeterminate = false
@@ -22,37 +23,33 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
     setData(fetchData(0, 50))
   }, [fetchData])
 
-  const getData = (prevData: T[], sortColumnParam?: keyof T, sortTypeParam?: SortType): T[] => {
-    if (Boolean(sortColumnParam) && Boolean(sortTypeParam)) {
-      return prevData.sort((a: T, b: T) => {
-        const x: T[keyof T] = a[sortColumnParam as keyof T]
-        const y: T[keyof T] = b[sortColumnParam as keyof T]
-
-        if (sortTypeParam === 'asc') {
-          if (typeof x === 'string' && typeof y === 'string') {
-            return x.localeCompare(y)
-          } else if (typeof x === 'number' && typeof y === 'number') {
-            return x - y
-          }
-        } else {
-          if (typeof x === 'string' && typeof y === 'string') {
-            return y.localeCompare(x)
-          } else if (typeof x === 'number' && typeof y === 'number') {
-            return y - x
-          }
-        }
-        return -1
-      })
-    }
-    return prevData
+  const highlightMatches = (text: string, search: string): T[keyof T] => {
+    const regex = new RegExp(search, 'gi')
+    return text.replace(regex, match => `<mark>${match}</mark>`) as T[keyof T]
   }
 
-  const loadMore = (sortColumnParam?: keyof T, sortTypeParam?: SortType): void => {
+  const loadMore = (): void => {
     setLoading(true)
     setTimeout(() => {
-      setData(getData([...data, ...fetchData(data.length, 50)], sortColumnParam ?? sortColumn, sortTypeParam ?? sortType))
+      const totalData: T[] = [...data, ...fetchData(data.length, 50, sortColumn, sortType, searchBar)]
+      setData(totalData)
       setLoading(false)
     }, 500)
+  }
+
+  const highlightData = (dataParam: T[]): T[] => {
+    return dataParam.map((item: T) => {
+      const obj: T = item
+      Object.keys(item).forEach((key: keyof T) => {
+        const value: T[keyof T] = item[key]
+        if (typeof value === 'string') {
+          obj[key] = highlightMatches(value, searchBar)
+        } else {
+          obj[key] = value
+        }
+      })
+      return obj
+    })
   }
 
   const handleSortColumn = (sortColumnParam: keyof T, sortTypeParam: SortType): void => {
@@ -61,7 +58,17 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
       setLoading(false)
       setSortColumn(sortColumnParam)
       setSortType(sortTypeParam)
-      setData(getData(data, sortColumnParam, sortTypeParam))
+      setData(fetchData(0, 50, sortColumnParam, sortTypeParam, searchBar))
+    }, 500)
+  }
+  const handleOnSearchBar = (searchBarParam: string): void => {
+    // eslint-disable-next-line no-debugger
+    debugger
+    setLoading(true)
+    setTimeout(() => {
+      setLoading(false)
+      setSearchBar(searchBarParam)
+      setData(fetchData(0, 50, sortColumn, sortType, searchBarParam))
     }, 500)
   }
 
@@ -70,7 +77,7 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
     const top = Math.abs(y)
 
     if (contextHeight - top - tableHeight < 300) {
-      loadMore(sortColumn, sortType)
+      loadMore()
     }
   }
 
@@ -109,7 +116,10 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
     handleCheck,
     checkedKeys,
     checkedColumnsHide,
-    setCheckedColumnsHide
+    setCheckedColumnsHide,
+    searchBar,
+    setSearchBar,
+    handleOnSearchBar
   }
 }
 
