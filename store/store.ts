@@ -5,12 +5,15 @@ import { activityManager, localStorageManager, rtkErrorNotification } from '@/st
 
 const reHydrateStore = (): { string: undefined } | undefined => {
   let stringApplicationState: string | null = null
-  if (typeof window !== 'undefined') {
-    stringApplicationState = localStorage.getItem(
-      'NextApplication'
-    )
+
+  if (typeof window === 'undefined') {
+    return
   }
-  const objectState = stringApplicationState !== null
+  stringApplicationState = localStorage.getItem(
+    'NextApplication'
+  )
+
+  const objectState = stringApplicationState !== null && stringApplicationState !== ''
     ? JSON.parse(stringApplicationState)
     : undefined
 
