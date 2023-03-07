@@ -1,3 +1,3 @@
-import InfiniteTable from "./InfiniteTable";
+import InfiniteTable from './InfiniteTable'
 
-export default InfiniteTable;
+export default InfiniteTable

@@ -1,34 +1,34 @@
-import React from 'react';
-import {Button, Divider, Form, IconButton, Panel, Stack} from 'rsuite';
-import GithubIcon from '@rsuite/icons/legacy/Github';
-import FacebookIcon from '@rsuite/icons/legacy/Facebook';
-import GoogleIcon from '@rsuite/icons/legacy/Google';
-import WechatIcon from '@rsuite/icons/legacy/Wechat';
-import Brand from "../../components/Brand";
-import Link from "next/link"
-import useSignIn, {FormValues, model} from "@/hooks/pages/sign-in/SignIn";
+import React from 'react'
+import { Button, Divider, Form, IconButton, Panel, Stack } from 'rsuite'
+import GithubIcon from '@rsuite/icons/legacy/Github'
+import FacebookIcon from '@rsuite/icons/legacy/Facebook'
+import GoogleIcon from '@rsuite/icons/legacy/Google'
+import WechatIcon from '@rsuite/icons/legacy/Wechat'
+import Brand from '../../components/Brand'
+import Link from 'next/link'
+import useSignIn, { type FormValues, model } from '@/hooks/pages/sign-in/SignIn'
 
 const SignIn = () => {
-    const {formValue, setFormValue, formRef, handleSubmit} = useSignIn()
-    return (
+  const { formValue, setFormValue, formRef, handleSubmit } = useSignIn()
+  return (
         <Stack
             justifyContent="center"
             alignItems="center"
             direction="column"
             style={{
-                height: '100vh'
+              height: '100vh'
             }}
         >
-            <Brand style={{marginBottom: 10}}/>
-            <Panel bordered style={{background: '#fff', width: 400}} header={<h3>Sign In</h3>}>
-                <p style={{marginBottom: 10}}>
+            <Brand style={{ marginBottom: 10 }}/>
+            <Panel bordered style={{ background: '#fff', width: 400 }} header={<h3>Sign In</h3>}>
+                <p style={{ marginBottom: 10 }}>
                     <span className="text-muted">New Here? </span>{' '}
                     <Link href="/sign-up"> Create an Account</Link>
                 </p>
 
                 <Form fluid
                       ref={formRef}
-                      onChange={(value, event) => setFormValue(value as FormValues)}
+                      onChange={(value, event) => { setFormValue(value as FormValues) }}
                       formValue={formValue}
                       model={model}>
                     <Form.Group>
@@ -38,7 +38,7 @@ const SignIn = () => {
                     <Form.Group>
                         <Form.ControlLabel>
                             <span>Password</span>
-                            <a style={{float: 'right'}}>Forgot password?</a>
+                            <a style={{ float: 'right' }}>Forgot password?</a>
                         </Form.ControlLabel>
                         <Form.Control name="password" type="password"/>
                     </Form.Group>
@@ -56,9 +56,7 @@ const SignIn = () => {
                 </Form>
             </Panel>
         </Stack>
-    );
-};
+  )
+}
 
-export default SignIn;
-
-
+export default SignIn

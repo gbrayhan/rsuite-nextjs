@@ -1,3 +1,3 @@
-import Sidepanel from "@/components/Sidepanel/Sidepanel";
+import Sidepanel from '@/components/Sidepanel/Sidepanel'
 
-export default Sidepanel;
+export default Sidepanel

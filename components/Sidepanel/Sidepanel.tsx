@@ -1,30 +1,30 @@
-import {Nav, Sidebar, Sidenav} from 'rsuite';
-import DashboardIcon from '@rsuite/icons/legacy/Dashboard';
-import GroupIcon from '@rsuite/icons/legacy/Group';
-import MagicIcon from '@rsuite/icons/legacy/Magic';
-import GearCircleIcon from '@rsuite/icons/legacy/GearCircle';
-import styles from "./Sidepanel.module.css"
-import React from "react";
-import {useRouter} from "next/router";
+import { Nav, Sidebar, Sidenav } from 'rsuite'
+import DashboardIcon from '@rsuite/icons/legacy/Dashboard'
+import GroupIcon from '@rsuite/icons/legacy/Group'
+import MagicIcon from '@rsuite/icons/legacy/Magic'
+import GearCircleIcon from '@rsuite/icons/legacy/GearCircle'
+import styles from './Sidepanel.module.css'
+import React from 'react'
+import { useRouter } from 'next/router'
 
-type PropsSidePanel = {
-    activeKey: string,
-    setActiveKey: React.Dispatch<React.SetStateAction<string>>
+interface PropsSidePanel {
+  activeKey: string
+  setActiveKey: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Sidepanel = ({activeKey, setActiveKey}: PropsSidePanel) => {
-    const [openKeys, setOpenKeys] = React.useState<string[]>(['4']);
-    const [expand, setExpand] = React.useState<boolean>(true);
+const Sidepanel = ({ activeKey, setActiveKey }: PropsSidePanel) => {
+  const [openKeys, setOpenKeys] = React.useState<string[]>(['4'])
+  const [expand, setExpand] = React.useState<boolean>(true)
 
-    const router = useRouter();
+  const router = useRouter()
 
-    return (<Sidebar
+  return (<Sidebar
         className={styles.SidePanel}
         width={expand ? 260 : 56}
         collapsible
     >
         <Sidenav expanded={expand}
-                 style={{display: "flex", minHeight: "100vh"}}
+                 style={{ display: 'flex', minHeight: '100vh' }}
                  openKeys={openKeys}
                  onOpenChange={setOpenKeys}
         >
@@ -61,22 +61,21 @@ const Sidepanel = ({activeKey, setActiveKey}: PropsSidePanel) => {
                         <Nav.Item eventKey="settingsChannels">Channels</Nav.Item>
                         <Nav.Item eventKey="settingsVersions">Versions</Nav.Item>
                         <Nav.Item onClick={() => {
-                            router.push('/logout').then(() => {
-                            })
+                          router.push('/logout').then(() => {
+                          })
                         }} eventKey="settingsLogout">Logout</Nav.Item>
                     </Nav.Menu>
                 </Nav>
             </Sidenav.Body>
-            <div style={{marginTop: "auto"}}>
+            <div style={{ marginTop: 'auto' }}>
                 <Sidenav.Toggle
                     expanded={expand}
-                    onToggle={(expanded) => setExpand(expanded)}
+                    onToggle={(expanded) => { setExpand(expanded) }}
                 />
             </div>
         </Sidenav>
 
-    </Sidebar>);
-};
+    </Sidebar>)
+}
 
-
-export default Sidepanel;
+export default Sidepanel

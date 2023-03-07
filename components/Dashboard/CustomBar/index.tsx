@@ -1,3 +1,3 @@
-import CustomBar from "@/components/Dashboard/CustomBar/CustomBar";
+import CustomBar from '@/components/Dashboard/CustomBar/CustomBar'
 
-export default CustomBar;
+export default CustomBar

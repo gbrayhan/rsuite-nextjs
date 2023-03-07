@@ -1,14 +1,14 @@
-import React from 'react';
+import React from 'react'
 
 interface LogoProps {
-  width?: number;
-  height?: number;
-  className?: string;
-  style?: React.CSSProperties;
+  width?: number
+  height?: number
+  className?: string
+  style?: React.CSSProperties
 }
 
-export default function Logo({ width, height, style, className = '' }: LogoProps) {
-  const styles = { width, height, display: 'inline-block', ...style };
+export default function Logo ({ width, height, style, className = '' }: LogoProps) {
+  const styles = { width, height, display: 'inline-block', ...style }
   return (
     <div
       style={styles}
@@ -77,5 +77,5 @@ export default function Logo({ width, height, style, className = '' }: LogoProps
         </g>
       </svg>
     </div>
-  );
+  )
 }

@@ -1,5 +1,5 @@
-import {UserState} from "@/store/reducers/User/types";
+import { type UserState } from '@/store/reducers/User/types'
 
-export type AppState = {
-    user: UserState;
+export interface AppState {
+  user: UserState
 }

@@ -1,3 +1,3 @@
-import DHB from "./DHB";
+import DHB from './DHB'
 
-export default DHB;
+export default DHB

@@ -1,34 +1,33 @@
-import {Container, Content} from "rsuite";
-import styles from "./DHB.module.css";
-import React from "react";
-import TitleContainer from "@/components/TitleContainer";
-import CustomTable from "../../layouts/CustomTable"
-import useCustomTable from "@/hooks/layouts/customTable/hooks";
-import {columnsCustomTable} from "./const";
-import {DataDHB} from "./types";
-import {fetchData} from "@/containers/DHB/mock";
+import { Container, Content } from 'rsuite'
+import styles from './DHB.module.css'
+import React from 'react'
+import TitleContainer from '@/components/TitleContainer'
+import CustomTable from '../../layouts/CustomTable'
+import useCustomTable from '@/hooks/layouts/customTable/hooks'
+import { columnsCustomTable } from './const'
+import { type DataDHB } from './types'
+import { fetchData } from '@/containers/DHB/mock'
 
 const DHB = () => {
-    const {
-        data,
-        loading,
-        checked,
-        indeterminate,
-        checkedKeys,
-        handleCheck,
-        handleCheckAll,
-        handleSortColumn,
-        sortColumn,
-        sortType,
-        handleScroll,
-        checkedColumnsHide,
-        setCheckedColumnsHide
-    } = useCustomTable(fetchData, "index", columnsCustomTable);
+  const {
+    data,
+    loading,
+    checked,
+    indeterminate,
+    checkedKeys,
+    handleCheck,
+    handleCheckAll,
+    handleSortColumn,
+    sortColumn,
+    sortType,
+    handleScroll,
+    checkedColumnsHide,
+    setCheckedColumnsHide
+  } = useCustomTable(fetchData, 'index', columnsCustomTable)
 
-
-    return (<Container>
+  return (<Container>
         <TitleContainer title="Derechohabientes"/>
-        <Content style={{margin: "1rem"}}>
+        <Content style={{ margin: '1rem' }}>
             <div className={styles.InfinityTableContainer}>
                 <CustomTable<DataDHB>
                     indexKey="index" data={data} tableHeight={700} loading={loading} checkedKeys={checkedKeys}
@@ -40,4 +39,4 @@ const DHB = () => {
         </Content>
     </Container>)
 }
-export default DHB;
+export default DHB

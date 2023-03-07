@@ -1,13 +1,11 @@
-import React, {useEffect} from 'react';
-import {useRouter} from 'next/router';
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
-const Login = () => {
-    const router = useRouter();
-    useEffect(() => {
-        router.push('/sign-in').then(() => {
-        });
-    })
+const Login = (): void => {
+  const router = useRouter()
+  useEffect(() => {
+    void router.push('/sign-in').then()
+  })
+}
 
-};
-
-export default Login;
+export default Login

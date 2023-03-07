@@ -1,3 +1,3 @@
-import CustomLine from "@/components/Dashboard/CustomLine/CustomLine";
+import CustomLine from '@/components/Dashboard/CustomLine/CustomLine'
 
-export default CustomLine;
+export default CustomLine

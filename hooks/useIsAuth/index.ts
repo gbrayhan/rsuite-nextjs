@@ -1,21 +1,21 @@
-import {useEffect} from "react";
-import {useSelector} from "react-redux";
-import {RootState} from "@/store/store";
-import {UserState} from "@/store/reducers/User/types";
-import {useRouter} from "next/router";
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { type RootState } from '@/store/store'
+import { type UserState } from '@/store/reducers/User/types'
+import { useRouter } from 'next/router'
 
 const useIsAuth = () => {
-    const router = useRouter();
-    const userState: UserState = useSelector((state: RootState) => state.user);
+  const router = useRouter()
+  const userState: UserState = useSelector((state: RootState) => state.user)
 
-    useEffect(() => {
-        if (!userState.auth.data.isAuthenticated) {
-            router.push('/sign-in').then(() => {
-            });
-        }
-    });
+  useEffect(() => {
+    if (!userState.auth.data.isAuthenticated) {
+      router.push('/sign-in').then(() => {
+      })
+    }
+  })
 
-    return {router, userState}
+  return { router, userState }
 }
 
-export default useIsAuth;
+export default useIsAuth

@@ -1,5 +1,5 @@
-import userReducer from "./User/userSlice";
+import userReducer from './User/userSlice'
 
 export {
-    userReducer,
+  userReducer
 }

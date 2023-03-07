@@ -1,5 +1,5 @@
-import React from 'react';
-import { Stack } from 'rsuite';
+import React from 'react'
+import { Stack } from 'rsuite'
 
 const Copyright = () => {
   return (
@@ -13,7 +13,7 @@ const Copyright = () => {
         </p>
       </div>
     </Stack>
-  );
-};
+  )
+}
 
-export default Copyright;
+export default Copyright

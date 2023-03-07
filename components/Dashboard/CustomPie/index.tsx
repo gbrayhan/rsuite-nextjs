@@ -1,4 +1,3 @@
-import CustomPie from "@/components/Dashboard/CustomPie/CustomPie";
+import CustomPie from '@/components/Dashboard/CustomPie/CustomPie'
 
-
-export default CustomPie;
+export default CustomPie

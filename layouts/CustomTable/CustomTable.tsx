@@ -1,36 +1,34 @@
-import React from "react";
-import {Checkbox, Table} from 'rsuite';
-import MoreIcon from '@rsuite/icons/legacy/More';
-import {SortType} from "rsuite-table";
-import {ColumnDefinition, CustomTableProps, ObjDataTable} from "./types";
-import {ActionCell} from "./components/ActionCell";
-import {FixedLoader} from "./components/FixedLoader";
-import {CheckCell} from "./components/CheckCell";
-import BarTable from "./components/BarTable";
+import React from 'react'
+import { Checkbox, Table } from 'rsuite'
+import MoreIcon from '@rsuite/icons/legacy/More'
+import { type SortType } from 'rsuite-table'
+import { type ColumnDefinition, type CustomTableProps, type ObjDataTable } from './types'
+import { ActionCell } from './components/ActionCell'
+import { FixedLoader } from './components/FixedLoader'
+import { CheckCell } from './components/CheckCell'
+import BarTable from './components/BarTable'
 
-const {Column, HeaderCell, Cell} = Table;
+const { Column, HeaderCell, Cell } = Table
 
 const CustomTable = <T extends ObjDataTable>({
-                                                 indexKey,
-                                                 data,
-                                                 sortColumn,
-                                                 sortType,
-                                                 handleSortColumn,
-                                                 handleScroll,
-                                                 handleCheckAll,
-                                                 checked,
-                                                 checkedKeys,
-                                                 handleCheck,
-                                                 loading,
-                                                 indeterminate,
-                                                 columnsCustomTable,
-                                                 tableHeight,
-                                                 checkedColumnsHide,
-                                                 setCheckedColumnsHide
-                                             }: CustomTableProps<T>) => {
-
-
-    return (<div>
+  indexKey,
+  data,
+  sortColumn,
+  sortType,
+  handleSortColumn,
+  handleScroll,
+  handleCheckAll,
+  checked,
+  checkedKeys,
+  handleCheck,
+  loading,
+  indeterminate,
+  columnsCustomTable,
+  tableHeight,
+  checkedColumnsHide,
+  setCheckedColumnsHide
+}: CustomTableProps<T>) => {
+  return (<div>
         <BarTable<T> columnsCustomTable={columnsCustomTable} checkedColumnsHide={checkedColumnsHide}
                      setCheckedColumnsHide={setCheckedColumnsHide}/>
         <Table
@@ -43,19 +41,19 @@ const CustomTable = <T extends ObjDataTable>({
             bordered
             cellBordered
             onSortColumn={(dataKeyParam, sortTypeParam?: SortType) => {
-                handleSortColumn(dataKeyParam as keyof T, sortTypeParam || 'asc');
+              handleSortColumn(dataKeyParam as keyof T, sortTypeParam || 'asc')
             }}
             onScroll={handleScroll}
         >
-            <Column width={50} align="center" fixed={"left"}>
-                <HeaderCell style={{padding: 0}}>
-                    <div style={{lineHeight: '40px'}}>
+            <Column width={50} align="center" fixed={'left'}>
+                <HeaderCell style={{ padding: 0 }}>
+                    <div style={{ lineHeight: '40px' }}>
                         <Checkbox
                             inline
                             checked={checked}
                             indeterminate={indeterminate}
                             onChange={(value, checked, event) => {
-                                handleCheckAll(checked)
+                              handleCheckAll(checked)
                             }}
                         />
                     </div>
@@ -64,7 +62,7 @@ const CustomTable = <T extends ObjDataTable>({
             </Column>
 
             {columnsCustomTable.map((column: ColumnDefinition<T>, index: number) => {
-                return (checkedColumnsHide.includes(String(column.dataKey)) && <Column
+              return (checkedColumnsHide.includes(String(column.dataKey)) && <Column
                     key={index}
                     width={column.width}
                     flexGrow={column.flexGrow}
@@ -75,10 +73,10 @@ const CustomTable = <T extends ObjDataTable>({
                 >
                     <HeaderCell>{column.header}</HeaderCell>
                     <Cell dataKey={column.dataKey as string}/>
-                </Column>);
+                </Column>)
             })}
 
-            <Column width={70} fixed={"right"}>
+            <Column width={70} fixed={'right'}>
                 <HeaderCell>
                     <MoreIcon/>
                 </HeaderCell>
@@ -86,7 +84,7 @@ const CustomTable = <T extends ObjDataTable>({
             </Column>
         </Table>
         {loading && <FixedLoader/>}
-    </div>);
+    </div>)
 }
 
-export default CustomTable;
+export default CustomTable

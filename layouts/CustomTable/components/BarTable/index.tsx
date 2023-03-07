@@ -1,4 +1,3 @@
-import BarTable from "./BarTable";
+import BarTable from './BarTable'
 
-
-export default BarTable;
+export default BarTable

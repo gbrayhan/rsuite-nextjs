@@ -1,10 +1,9 @@
-import { NativeCellProps} from "../types";
+import { type NativeCellProps } from '../types'
 
-export type ActionCellProps<T> = {
-    rowData?: T; dataKey: keyof T; props?: NativeCellProps;
+export interface ActionCellProps<T> {
+  rowData?: T; dataKey: keyof T; props?: NativeCellProps
 }
 
-export type ParamsRenderMenu = {
-    onClose: () => void; left: number; top: number; className: string;
+export interface ParamsRenderMenu {
+  onClose: () => void; left: number; top: number; className: string
 }
-

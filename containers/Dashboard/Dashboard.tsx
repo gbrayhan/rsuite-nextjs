@@ -1,16 +1,16 @@
-import {Container, Content} from "rsuite";
-import styles from "./Home.module.css";
-import CustomBar from "@/components/Dashboard/CustomBar";
-import CustomPie from "@/components/Dashboard/CustomPie";
-import CustomLine from "@/components/Dashboard/CustomLine";
-import React from "react";
-import TitleContainer from "@/components/TitleContainer";
+import { Container, Content } from 'rsuite'
+import styles from './Home.module.css'
+import CustomBar from '@/components/Dashboard/CustomBar'
+import CustomPie from '@/components/Dashboard/CustomPie'
+import CustomLine from '@/components/Dashboard/CustomLine'
+import React from 'react'
+import TitleContainer from '@/components/TitleContainer'
 
 const Dashboard = () => {
-    return (
+  return (
         <Container>
             <TitleContainer title="Dashboard"/>
-            <Content style={{margin: "1rem"}}>
+            <Content style={{ margin: '1rem' }}>
                 <div className={styles.BarGraphContainer}>
                     <CustomBar/>
                 </div>
@@ -20,7 +20,7 @@ const Dashboard = () => {
                 </div>
             </Content>
         </Container>
-    );
-};
+  )
+}
 
-export default Dashboard;
+export default Dashboard

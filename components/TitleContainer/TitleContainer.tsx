@@ -1,19 +1,18 @@
-import {Divider, Header} from "rsuite";
-import React from "react";
+import { Divider, Header } from 'rsuite'
+import React from 'react'
 
-type TitleContainerProps = {
-    title: string
+interface TitleContainerProps {
+  title: string
 }
-const TitleContainer = ({title}: TitleContainerProps) => {
-
-    return (
+const TitleContainer = ({ title }: TitleContainerProps) => {
+  return (
         <>
-            <Header style={{marginTop: "1rem", marginLeft: "1rem"}}>
+            <Header style={{ marginTop: '1rem', marginLeft: '1rem' }}>
                 <h2>{title}</h2>
             </Header>
-            <Divider style={{marginLeft: "1rem", marginRight: "1rem"}}/>
+            <Divider style={{ marginLeft: '1rem', marginRight: '1rem' }}/>
         </>
-    )
+  )
 }
 
 export default TitleContainer

@@ -1,1 +1,1 @@
-export const tmp = "remove it when you added a new constant"
+export const tmp = 'remove it when you added a new constant'

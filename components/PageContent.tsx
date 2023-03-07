@@ -1,19 +1,19 @@
-import React from 'react';
-import { Panel, PanelProps } from 'rsuite';
-import Copyright from './Copyright';
+import React from 'react'
+import { Panel, type PanelProps } from 'rsuite'
+import Copyright from './Copyright'
 
 interface PageContentProps extends PanelProps {
-  showCopyright?: boolean;
+  showCopyright?: boolean
 }
 
 const PageContent = (props: PageContentProps) => {
-  const { showCopyright = true, ...panelProps } = props;
+  const { showCopyright = true, ...panelProps } = props
   return (
     <>
       <Panel className="page-content" {...panelProps} />
       {showCopyright && <Copyright />}
     </>
-  );
-};
+  )
+}
 
-export default PageContent;
+export default PageContent
