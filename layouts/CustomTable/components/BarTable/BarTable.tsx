@@ -11,16 +11,21 @@ export interface PropsColumnsHide<T> {
   setCheckedColumnsHide: (value: string[]) => void
 
 }
+
 const ColumnsHide = <T extends object>({
   columnsCustomTable,
   checkedColumnsHide,
   setCheckedColumnsHide
 }: PropsColumnsHide<T>): React.ReactElement => {
-  const handleChange = (value: string[]) => { setCheckedColumnsHide(value) }
+  const handleChange = (value: string[]): void => {
+    setCheckedColumnsHide(value)
+  }
 
   return (
         <Popover title="Title">
-            <CheckboxGroup onChange={(value, event) => { handleChange(value as string[]) }} value={checkedColumnsHide}
+            <CheckboxGroup onChange={(value, event) => {
+              handleChange(value as string[])
+            }} value={checkedColumnsHide}
                            name="checkboxList" style={{ width: '15rem' }}>
                 {columnsCustomTable.map((item: ColumnDefinition<T>, index) => {
                   return (
@@ -42,7 +47,7 @@ const BarTable = <T extends object>({
   columnsCustomTable,
   checkedColumnsHide,
   setCheckedColumnsHide
-}: PropsBarTable<T>) => {
+}: PropsBarTable<T>): React.ReactElement => {
   return (
         <div className={styles.BarTableContainer}>
 

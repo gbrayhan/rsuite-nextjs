@@ -2,7 +2,7 @@ import { Bar } from '@nivo/bar'
 import React from 'react'
 import { DataGraphBar } from '@/components/Dashboard/CustomBar/const'
 
-const CustomBar = () => {
+const CustomBar = (): React.ReactElement => {
   const keys = ['hot dogs', 'burgers', 'sandwich', 'kebab', 'fries', 'donut']
 
   const commonBarProps = {

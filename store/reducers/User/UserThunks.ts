@@ -2,7 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { accessTokenByRefreshTokenAPI, loginAPI } from '@/store/reducers/User/api/userAPI'
 import { type RootState } from '@/store/store'
 import { type LoginResponse } from '@/store/reducers/User/api/types'
-import { LoginResponseToEntityUserMapper } from '@/store/reducers/User/mappers'
 
 export const login = createAsyncThunk(
   'user/auth/login',

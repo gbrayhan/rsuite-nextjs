@@ -5,7 +5,7 @@ import { type LoginResponse } from '@/store/reducers/User/api/types'
 export async function loginAPI (email: string, password: string): Promise<LoginResponse> {
   const data = { email, password }
   return await axios({
-    url: `${BACKEND_URL}/auth/login`,
+    url: `${String(BACKEND_URL)}/auth/login`,
     method: 'post',
     data,
     timeout: 4000,
@@ -26,6 +26,6 @@ export async function accessTokenByRefreshTokenAPI (refreshToken: string): Promi
     headers: {
       'content-type': 'application/json'
     },
-    url: `${BACKEND_URL}/api/auth/refresh`
+    url: `${String(BACKEND_URL)}/api/auth/refresh`
   }).then((response: AxiosResponse<LoginResponse>) => response.data)
 }

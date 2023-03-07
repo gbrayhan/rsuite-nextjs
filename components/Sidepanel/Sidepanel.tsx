@@ -12,7 +12,7 @@ interface PropsSidePanel {
   setActiveKey: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Sidepanel = ({ activeKey, setActiveKey }: PropsSidePanel) => {
+const Sidepanel = ({ activeKey, setActiveKey }: PropsSidePanel): React.ReactElement => {
   const [openKeys, setOpenKeys] = React.useState<string[]>(['4'])
   const [expand, setExpand] = React.useState<boolean>(true)
 
@@ -61,8 +61,7 @@ const Sidepanel = ({ activeKey, setActiveKey }: PropsSidePanel) => {
                         <Nav.Item eventKey="settingsChannels">Channels</Nav.Item>
                         <Nav.Item eventKey="settingsVersions">Versions</Nav.Item>
                         <Nav.Item onClick={() => {
-                          router.push('/logout').then(() => {
-                          })
+                          void router.push('/logout').then()
                         }} eventKey="settingsLogout">Logout</Nav.Item>
                     </Nav.Menu>
                 </Nav>
@@ -70,7 +69,9 @@ const Sidepanel = ({ activeKey, setActiveKey }: PropsSidePanel) => {
             <div style={{ marginTop: 'auto' }}>
                 <Sidenav.Toggle
                     expanded={expand}
-                    onToggle={(expanded) => { setExpand(expanded) }}
+                    onToggle={(expanded) => {
+                      setExpand(expanded)
+                    }}
                 />
             </div>
         </Sidenav>

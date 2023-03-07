@@ -4,14 +4,17 @@ import { type RootState } from '@/store/store'
 import { type UserState } from '@/store/reducers/User/types'
 import { useRouter } from 'next/router'
 
-const useIsAuth = () => {
+export interface UseIsAuthType {
+  router: ReturnType<typeof useRouter>
+  userState: UserState
+}
+const useIsAuth = (): UseIsAuthType => {
   const router = useRouter()
   const userState: UserState = useSelector((state: RootState) => state.user)
 
   useEffect(() => {
     if (!userState.auth.data.isAuthenticated) {
-      router.push('/sign-in').then(() => {
-      })
+      void router.push('/sign-in').then()
     }
   })
 

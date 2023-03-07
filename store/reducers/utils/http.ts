@@ -1,6 +1,7 @@
 import { type ObjectFormType } from '@/store/reducers/types/http'
 
-export const getFormData = (object: ObjectFormType) => Object.keys(object).reduce((formData: FormData, key: string) => {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+export const getFormData = (object: ObjectFormType): FormData => Object.keys(object).reduce((formData: FormData, key: string) => {
   formData.append(key, object[key])
   return formData
 }, new FormData())

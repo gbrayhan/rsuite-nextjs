@@ -8,7 +8,7 @@ import Brand from '../../components/Brand'
 import Link from 'next/link'
 import useSignIn, { type FormValues, model } from '@/hooks/pages/sign-in/SignIn'
 
-const SignIn = () => {
+const SignIn = (): React.ReactElement => {
   const { formValue, setFormValue, formRef, handleSubmit } = useSignIn()
   return (
         <Stack

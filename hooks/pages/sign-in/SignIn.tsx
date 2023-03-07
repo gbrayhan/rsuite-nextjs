@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { type Form, Schema } from 'rsuite'
+import { type Form, type FormInstance, Schema } from 'rsuite'
 import { useDispatch, useSelector } from 'react-redux'
 import { type ThunkDispatch } from 'redux-thunk'
 import { type RootState } from '@/store/store'
@@ -22,16 +22,21 @@ export interface FormValues {
   password: string
 }
 
-const useSignIn = () => {
+export interface UseSignIn {
+  formValue: FormValues
+  setFormValue: (value: FormValues) => void
+  handleSubmit: () => void
+  formRef: React.RefObject<FormInstance<Record<string, undefined>, string, Record<string, string | undefined>>>
+
+}
+
+const useSignIn = (): UseSignIn => {
   const router = useRouter()
   const userState: UserState = useSelector((state: RootState) => state.user)
 
   useEffect(() => {
     if (userState.auth.data.isAuthenticated) {
-      router.push('/home').then(() => {
-      })
-    } else {
-
+      void router.push('/home').then()
     }
   })
 
@@ -42,12 +47,12 @@ const useSignIn = () => {
   })
   const dispatch = useDispatch<ThunkDispatch<RootState, unknown, AnyAction>>()
 
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     const resultCheck = formRef.current?.check()
-    if (!resultCheck) {
+    if (resultCheck === false) {
       return
     }
-    dispatch(login({ email: formValue.email, password: formValue.password }))
+    void dispatch(login({ email: formValue.email, password: formValue.password }))
   }
 
   return { formValue, setFormValue, handleSubmit, formRef }

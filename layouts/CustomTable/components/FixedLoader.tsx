@@ -1,7 +1,7 @@
 import { Loader } from 'rsuite'
 import React from 'react'
 
-export const FixedLoader = () => (<Loader
+export const FixedLoader = (): React.ReactElement => (<Loader
     content="Loading..."
     style={{
       display: 'flex',

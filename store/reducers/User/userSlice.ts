@@ -32,7 +32,7 @@ const userSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.auth.status = 'error'
         state.information.status = 'error'
-        state.auth.error = action.error.message || 'Internal Error'
+        state.auth.error = action?.error?.message ?? 'Internal Error'
         state.auth.data = initialState.auth.data
         state.information.data = initialState.information.data
       })

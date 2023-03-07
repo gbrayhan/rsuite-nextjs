@@ -8,7 +8,7 @@ import { columnsCustomTable } from './const'
 import { type DataDHB } from './types'
 import { fetchData } from '@/containers/DHB/mock'
 
-const DHB = () => {
+const DHB = (): React.ReactElement => {
   const {
     data,
     loading,
@@ -23,7 +23,7 @@ const DHB = () => {
     handleScroll,
     checkedColumnsHide,
     setCheckedColumnsHide
-  } = useCustomTable(fetchData, 'index', columnsCustomTable)
+  } = useCustomTable<DataDHB>(fetchData, 'index', columnsCustomTable)
 
   return (<Container>
         <TitleContainer title="Derechohabientes"/>

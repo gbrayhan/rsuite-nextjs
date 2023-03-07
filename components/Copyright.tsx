@@ -1,7 +1,7 @@
 import React from 'react'
 import { Stack } from 'rsuite'
 
-const Copyright = () => {
+const Copyright = (): React.ReactElement => {
   return (
     <Stack className="copyright" justifyContent="center" style={{ height: 40, marginTop: 20 }}>
       <div className="container">

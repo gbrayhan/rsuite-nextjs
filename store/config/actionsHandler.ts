@@ -1,7 +1,7 @@
 import { type AnyAction } from '@reduxjs/toolkit'
 import { type AppState } from '../reducers/AppState'
 
-export const actionsHandler = (action: AnyAction, reduxCurrentState: AppState) => {
+export const actionsHandler = (action: AnyAction, reduxCurrentState: AppState): void => {
   switch (action.type) {
     case 'auth/authLogin/fulfilled':
       localStorage.setItem(

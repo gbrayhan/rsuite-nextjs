@@ -2,7 +2,7 @@ import { Pie } from '@nivo/pie'
 import React from 'react'
 import { DataPie } from '@/components/Dashboard/CustomPie/const'
 
-const CustomPie = () => {
+const CustomPie = (): React.ReactElement => {
   const commonPieProperties = {
     width: 500,
     height: 500,

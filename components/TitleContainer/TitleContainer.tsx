@@ -4,7 +4,7 @@ import React from 'react'
 interface TitleContainerProps {
   title: string
 }
-const TitleContainer = ({ title }: TitleContainerProps) => {
+const TitleContainer = ({ title }: TitleContainerProps): React.ReactElement => {
   return (
         <>
             <Header style={{ marginTop: '1rem', marginLeft: '1rem' }}>

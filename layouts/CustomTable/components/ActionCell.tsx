@@ -7,7 +7,7 @@ import { type ActionCellProps, type ParamsRenderMenu } from './types'
 export const renderMenuActionCell = ({
   onClose, left, top, className
 }: ParamsRenderMenu, ref?: ((instance: (HTMLDivElement | null)) => void) | React.RefObject<HTMLDivElement> | null | undefined): React.ReactElement => {
-  const handleSelect = (eventKey?: string) => {
+  const handleSelect = (eventKey?: string): void => {
     onClose()
   }
   return (<Popover ref={ref} className={className} style={{ left, top }} full>
@@ -21,7 +21,7 @@ export const renderMenuActionCell = ({
     </Popover>)
 }
 
-export const ActionCell = <T extends object>({ rowData, dataKey, ...props }: ActionCellProps<T>) => {
+export const ActionCell = <T extends object>({ rowData, dataKey, ...props }: ActionCellProps<T>): React.ReactElement => {
   return (<Cell {...props} className="link-group">
         <Whisper placement="autoVerticalStart" trigger="click"
                  speaker={(params, ref) => renderMenuActionCell(params as ParamsRenderMenu, ref)}>

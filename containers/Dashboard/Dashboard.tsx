@@ -6,7 +6,7 @@ import CustomLine from '@/components/Dashboard/CustomLine'
 import React from 'react'
 import TitleContainer from '@/components/TitleContainer'
 
-const Dashboard = () => {
+const Dashboard = (): React.ReactElement => {
   return (
         <Container>
             <TitleContainer title="Dashboard"/>

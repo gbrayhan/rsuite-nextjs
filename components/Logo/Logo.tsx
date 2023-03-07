@@ -7,7 +7,7 @@ interface LogoProps {
   style?: React.CSSProperties
 }
 
-export default function Logo ({ width, height, style, className = '' }: LogoProps) {
+export default function Logo ({ width, height, style, className = '' }: LogoProps): React.ReactElement {
   const styles = { width, height, display: 'inline-block', ...style }
   return (
     <div

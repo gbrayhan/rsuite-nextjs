@@ -3,18 +3,15 @@ import { useSelector } from 'react-redux'
 import { type RootState } from '@/store/store'
 import { useEffect } from 'react'
 
-export default function Main () {
+export default function Main (): void {
   const user = useSelector((state: RootState) => state.user)
   const router = useRouter()
 
   useEffect(() => {
-    if (user.information.data.isAuthenticated) {
-      router.push('/home').then(() => {
-      })
+    if (user?.information?.data?.isAuthenticated === true) {
+      void router.push('/home').then()
     } else {
-      router.push('/sign-in').then(() => {
-      })
+      void router.push('/sign-in').then()
     }
-  }
-  )
+  })
 }

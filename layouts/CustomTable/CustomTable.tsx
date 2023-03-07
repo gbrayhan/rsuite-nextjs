@@ -27,7 +27,7 @@ const CustomTable = <T extends ObjDataTable>({
   tableHeight,
   checkedColumnsHide,
   setCheckedColumnsHide
-}: CustomTableProps<T>) => {
+}: CustomTableProps<T>): React.ReactElement => {
   return (<div>
         <BarTable<T> columnsCustomTable={columnsCustomTable} checkedColumnsHide={checkedColumnsHide}
                      setCheckedColumnsHide={setCheckedColumnsHide}/>
@@ -41,7 +41,7 @@ const CustomTable = <T extends ObjDataTable>({
             bordered
             cellBordered
             onSortColumn={(dataKeyParam, sortTypeParam?: SortType) => {
-              handleSortColumn(dataKeyParam as keyof T, sortTypeParam || 'asc')
+              handleSortColumn(dataKeyParam as keyof T, sortTypeParam ?? 'asc')
             }}
             onScroll={handleScroll}
         >

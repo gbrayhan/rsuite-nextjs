@@ -1,26 +1,22 @@
-import { AnyAction, combineReducers, configureStore, type Dispatch, type Reducer } from '@reduxjs/toolkit'
+import { combineReducers, configureStore, type Dispatch, type Reducer } from '@reduxjs/toolkit'
 import { userReducer } from './reducers'
-// import {
-//    logout,
-//    setActionDataElement,
-// } from "../reducers/authentication/authSlice";
 import { type AppState } from './reducers/AppState'
 import { activityManager, localStorageManager, rtkErrorNotification } from '@/store/middlewares'
 
-const reHydrateStore = () => {
+const reHydrateStore = (): { string: undefined } | undefined => {
   let stringApplicationState: string | null = null
   if (typeof window !== 'undefined') {
     stringApplicationState = localStorage.getItem(
       'NextApplication'
     )
   }
-  const objectState = stringApplicationState
+  const objectState = stringApplicationState !== null
     ? JSON.parse(stringApplicationState)
     : undefined
 
   if (
-    objectState?.auth?.user?.data &&
-        objectState?.auth?.security?.data?.accessToken
+    (Boolean((objectState?.auth?.user?.data))) &&
+        (Boolean((objectState?.auth?.security?.data?.accessToken)))
   ) {
     return JSON.parse(stringApplicationState ?? '')
   }
@@ -53,7 +49,6 @@ const store = configureStore({
 })
 
 export type AppDispatch = typeof store.dispatch
-type DispatchFunc = () => AppDispatch
 
 export type RootState = ReturnType<typeof store.getState>
 

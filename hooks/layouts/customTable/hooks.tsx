@@ -23,10 +23,10 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
   }, [fetchData])
 
   const getData = (prevData: T[], sortColumnParam?: keyof T, sortTypeParam?: SortType): T[] => {
-    if (sortColumnParam && sortTypeParam) {
+    if (Boolean(sortColumnParam) && Boolean(sortTypeParam)) {
       return prevData.sort((a: T, b: T) => {
-        const x: T[keyof T] = a[sortColumnParam]
-        const y: T[keyof T] = b[sortColumnParam]
+        const x: T[keyof T] = a[sortColumnParam as keyof T]
+        const y: T[keyof T] = b[sortColumnParam as keyof T]
 
         if (sortTypeParam === 'asc') {
           if (typeof x === 'string' && typeof y === 'string') {
@@ -47,15 +47,15 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
     return prevData
   }
 
-  const loadMore = (sortColumnParam?: keyof T, sortTypeParam?: SortType) => {
+  const loadMore = (sortColumnParam?: keyof T, sortTypeParam?: SortType): void => {
     setLoading(true)
     setTimeout(() => {
-      setData(getData([...data, ...fetchData(data.length, 50)], sortColumnParam || sortColumn, sortTypeParam || sortType))
+      setData(getData([...data, ...fetchData(data.length, 50)], sortColumnParam ?? sortColumn, sortTypeParam ?? sortType))
       setLoading(false)
     }, 500)
   }
 
-  const handleSortColumn = (sortColumnParam: keyof T, sortTypeParam: SortType) => {
+  const handleSortColumn = (sortColumnParam: keyof T, sortTypeParam: SortType): void => {
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
@@ -65,7 +65,7 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
     }, 500)
   }
 
-  const handleScroll = (x: number, y: number) => {
+  const handleScroll = (x: number, y: number): void => {
     const contextHeight = data.length * 46
     const top = Math.abs(y)
 
@@ -82,7 +82,7 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
     indeterminate = true
   }
 
-  const handleCheckAll = (checked: boolean) => {
+  const handleCheckAll = (checked: boolean): void => {
     const keys: Array<string | number> = checked
       ? data.map(item => {
         const value = item[indexTable]
@@ -91,7 +91,7 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
       : []
     setCheckedKeys(keys)
   }
-  const handleCheck = (value: string | number, checked: boolean) => {
+  const handleCheck = (value: string | number, checked: boolean): void => {
     const keys = checked ? [...checkedKeys, value] : checkedKeys.filter(item => item !== value)
     setCheckedKeys(keys)
   }

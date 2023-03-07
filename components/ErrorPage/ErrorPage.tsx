@@ -8,7 +8,7 @@ interface ErrorPageProps {
 }
 
 const ErrorPage: React.FC<ErrorPageProps> = ({ code = 404, children }) => {
-  const errorImg = errorsMap[`Error${code}Img`] || errorsMap.Error404Img
+  const errorImg: string = errorsMap[`Error${code}Img`] ?? errorsMap.Error404Img
   return (
         <div className="error-page">
             <div className="item">

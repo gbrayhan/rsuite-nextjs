@@ -5,11 +5,16 @@ import { Cell } from 'rsuite-table'
 import { type ValueType } from 'rsuite/Checkbox'
 
 export interface CheckCellProps<T> {
-  rowData?: T, onChange: (value: number, checked: boolean) => void, checkedKeys: Array<string | number>, dataKey: keyof T, props?: NativeCellProps
+  rowData?: T
+  onChange: (value: number, checked: boolean) => void
+  checkedKeys: Array<string | number>
+  dataKey: keyof T
+  props?: NativeCellProps
 }
+
 export const CheckCell = <T extends object>({
   rowData, onChange, checkedKeys, dataKey, ...props
-}: CheckCellProps<T>) => (<Cell {...props} style={{ padding: 0 }}>
+}: CheckCellProps<T>): React.ReactElement => (<Cell {...props} style={{ padding: 0 }}>
     <div style={{ lineHeight: '46px' }}>
         <Checkbox
             value={(rowData != null) ? rowData[dataKey] as ValueType : undefined}

@@ -1,4 +1,9 @@
 module.exports = {
+  settings: {
+    react: {
+      version: 'detect'
+    }
+  },
   env: {
     browser: true,
     es2021: true
@@ -8,8 +13,7 @@ module.exports = {
     'plugin:react/recommended',
     'standard-with-typescript'
   ],
-  overrides: [
-  ],
+  overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     project: './tsconfig.json',
@@ -18,9 +22,10 @@ module.exports = {
   },
   plugins: [
     'react',
-    '@typescript-eslint',
-
+    '@typescript-eslint'
   ],
-  rules: {
-  }
+  rules: {},
+  ignorePatterns: [
+    'node_modules', 'next.config.js', 'next-env.d.ts'
+  ]
 }
