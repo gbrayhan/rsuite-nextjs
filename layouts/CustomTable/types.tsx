@@ -64,4 +64,5 @@ export interface CustomTableProps<T> {
   setCheckedColumnsHide: (value: string[]) => void
   searchBar: string
   handleOnSearchBar: (value: string) => void
+  highlightMatches: (text: string, search: string) => React.ReactElement
 }

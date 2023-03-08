@@ -1,4 +1,5 @@
 import { type SortType } from 'rsuite-table'
+import type React from 'react'
 
 export interface HookCustomTable<T> {
   data: T[]
@@ -15,6 +16,6 @@ export interface HookCustomTable<T> {
   checkedColumnsHide: string[]
   setCheckedColumnsHide: (value: string[]) => void
   searchBar: string
-  setSearchBar: (value: string) => void
   handleOnSearchBar: (searchBarParam: string) => void
+  highlightMatches: (text: string, search: string) => React.ReactElement
 }

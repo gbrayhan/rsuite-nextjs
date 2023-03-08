@@ -2,10 +2,13 @@ import React from 'react'
 import { type SortType } from 'rsuite-table'
 import { type ColumnDefinition, type ObjDataTable } from '@/layouts/CustomTable/types'
 import { type HookCustomTable } from './types'
+import { debounce } from 'lodash'
 
 export const tableHeight = 750
 
-const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit: number, sortColumnParam?: keyof T, sortTypeParam?: SortType, searchBar?: string) => T[], indexTable: keyof T, columnsCustomTable: Array<ColumnDefinition<T>>): HookCustomTable<T> => {
+const useCustomTable = <T extends ObjDataTable>(
+  fetchData: (start: number, limit: number, sortColumnParam?: keyof T, sortTypeParam?: SortType, searchBar?: string) => T[],
+  indexTable: keyof T, columnsCustomTable: Array<ColumnDefinition<T>>): HookCustomTable<T> => {
   const [data, setData] = React.useState<T[]>([])
   const [sortColumn, setSortColumn] = React.useState<keyof T>(indexTable)
   const [sortType, setSortType] = React.useState<SortType>('desc')
@@ -21,13 +24,65 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
 
   React.useEffect(() => {
     setData(fetchData(0, 50))
-  }, [fetchData])
+  }, [])
 
-  const highlightMatches = (text: string, search: string): T[keyof T] => {
-    const regex = new RegExp(search, 'gi')
-    return text.replace(regex, match => `<mark>${match}</mark>`) as T[keyof T]
+  React.useEffect(() => {
+    if (searchBar.length > 1 || searchBar.length === 0) {
+      handleSearch()
+    } else {
+      setData([])
+    }
+  }, [searchBar])
+
+  const handleSearch = debounce(() => {
+    setLoading(true)
+    setData([])
+
+    setTimeout(() => {
+      setData(fetchData(0, 50, sortColumn, sortType, searchBar))
+      setLoading(false)
+    }, 200)
+  }, 2000)
+
+  const handleOnSearchBar = (searchBarParam: string): void => {
+    setSearchBar(searchBarParam)
+    setData([])
   }
 
+  const highlightMatches = (text: string, search: string): React.ReactElement => {
+    const regex = new RegExp(search, 'gi')
+    const matchArray = text.match(regex)
+
+    if (matchArray == null || search.length < 2) {
+      return <>{text}</>
+    }
+
+    const matches = matchArray.map((match, index) => ({
+      index,
+      length: match.length
+    }))
+
+    let lastIndex = 0
+    const highlightedText: Array<string | React.ReactNode> = []
+    for (const match of matches) {
+      const { index, length } = match
+      const preMatch = text.substring(lastIndex, index)
+      if (preMatch !== '') {
+        highlightedText.push(preMatch)
+      }
+      // eslint-disable-next-line no-debugger
+      debugger
+      highlightedText.push(<mark key={lastIndex}>{search}</mark>)
+      lastIndex = index + length
+    }
+
+    const remainingText = text.substring(lastIndex)
+    if (remainingText !== '') {
+      highlightedText.push(remainingText)
+    }
+
+    return <>{highlightedText}</>
+  }
   const loadMore = (): void => {
     setLoading(true)
     setTimeout(() => {
@@ -37,38 +92,15 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
     }, 500)
   }
 
-  const highlightData = (dataParam: T[]): T[] => {
-    return dataParam.map((item: T) => {
-      const obj: T = item
-      Object.keys(item).forEach((key: keyof T) => {
-        const value: T[keyof T] = item[key]
-        if (typeof value === 'string') {
-          obj[key] = highlightMatches(value, searchBar)
-        } else {
-          obj[key] = value
-        }
-      })
-      return obj
-    })
-  }
-
   const handleSortColumn = (sortColumnParam: keyof T, sortTypeParam: SortType): void => {
     setLoading(true)
+    setData([])
+
     setTimeout(() => {
       setLoading(false)
       setSortColumn(sortColumnParam)
       setSortType(sortTypeParam)
       setData(fetchData(0, 50, sortColumnParam, sortTypeParam, searchBar))
-    }, 500)
-  }
-  const handleOnSearchBar = (searchBarParam: string): void => {
-    // eslint-disable-next-line no-debugger
-    debugger
-    setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-      setSearchBar(searchBarParam)
-      setData(fetchData(0, 50, sortColumn, sortType, searchBarParam))
     }, 500)
   }
 
@@ -118,8 +150,8 @@ const useCustomTable = <T extends ObjDataTable>(fetchData: (start: number, limit
     checkedColumnsHide,
     setCheckedColumnsHide,
     searchBar,
-    setSearchBar,
-    handleOnSearchBar
+    handleOnSearchBar,
+    highlightMatches
   }
 }
 

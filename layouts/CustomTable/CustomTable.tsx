@@ -28,7 +28,7 @@ const CustomTable = <T extends ObjDataTable>({
   checkedColumnsHide,
   setCheckedColumnsHide,
   searchBar,
-  handleOnSearchBar
+  handleOnSearchBar, highlightMatches
 }: CustomTableProps<T>): React.ReactElement => {
   return (<div>
         <BarTable<T> columnsCustomTable={columnsCustomTable} checkedColumnsHide={checkedColumnsHide}
@@ -75,7 +75,7 @@ const CustomTable = <T extends ObjDataTable>({
                 >
                     <HeaderCell>{column.header}</HeaderCell>
                     <Cell dataKey={column.dataKey as string}>
-                        {(rowData) => <>{rowData[column.dataKey as string]}</>}
+                        {(rowData) => (searchBar !== '') ? highlightMatches(String(rowData[column.dataKey as string]), searchBar) : rowData[column.dataKey as string] }
                     </Cell>
                 </Column>)
             })}
