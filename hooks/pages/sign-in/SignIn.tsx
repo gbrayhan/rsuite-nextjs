@@ -27,18 +27,33 @@ export interface UseSignIn {
   setFormValue: (value: FormValues) => void
   handleSubmit: () => void
   formRef: React.RefObject<FormInstance<Record<string, undefined>, string, Record<string, string | undefined>>>
+  router: ReturnType<typeof useRouter>
+  userState: UserState
 
+  isAuth: boolean
+  loadingAuth: boolean
 }
 
 const useSignIn = (): UseSignIn => {
   const router = useRouter()
   const userState: UserState = useSelector((state: RootState) => state.user)
+  const isAuth = userState?.auth?.data?.isAuthenticated
+  const [loadingAuth, setLoadingAuth] = React.useState<boolean>(true)
+  const [isHydrated, setIsHydrated] = React.useState<boolean>(false)
 
   useEffect(() => {
-    if (userState.auth.data.isAuthenticated) {
+    setIsHydrated(true)
+  }, [])
+
+  useEffect(() => {
+    if (isHydrated && isAuth) {
       void router.push('/home').then()
     }
-  })
+
+    if (isHydrated && !isAuth) {
+      setLoadingAuth(false)
+    }
+  }, [isAuth, isHydrated, router])
 
   const formRef = React.useRef<React.ElementRef<typeof Form>>(null)
   const [formValue, setFormValue] = React.useState<FormValues>({
@@ -55,7 +70,7 @@ const useSignIn = (): UseSignIn => {
     void dispatch(login({ email: formValue.email, password: formValue.password }))
   }
 
-  return { formValue, setFormValue, handleSubmit, formRef }
+  return { formValue, setFormValue, handleSubmit, formRef, router, userState, isAuth, loadingAuth }
 }
 
 export default useSignIn

@@ -3,35 +3,34 @@ import { userReducer } from './reducers'
 import { type AppState } from './reducers/AppState'
 import { activityManager, localStorageManager, rtkErrorNotification } from '@/store/middlewares'
 
-const reHydrateStore = (): { string: undefined } | undefined => {
+const reHydrateStore = (): AppState | undefined => {
   let stringApplicationState: string | null = null
 
   if (typeof window === 'undefined') {
-    return
+    return undefined
   }
   stringApplicationState = localStorage.getItem(
     'NextApplication'
   )
 
-  const objectState = stringApplicationState !== null && stringApplicationState !== ''
+  const objectState: AppState = stringApplicationState !== null && stringApplicationState !== ''
     ? JSON.parse(stringApplicationState)
     : undefined
 
-  if (
-    (Boolean((objectState?.auth?.user?.data))) &&
-        (Boolean((objectState?.auth?.security?.data?.accessToken)))
+  if (objectState?.user?.auth?.data?.isAuthenticated &&
+    (Boolean((objectState?.user?.auth.data.token))) &&
+        (Boolean((objectState?.user?.auth.data.refreshToken)))
   ) {
-    return JSON.parse(stringApplicationState ?? '')
+    return objectState
   }
-  if (typeof window !== 'undefined') {
-    localStorage.setItem('NextApplication', '')
-  }
+  localStorage.setItem('NextApplication', '')
   return undefined
 }
 
 const combinedReducer = combineReducers({
   user: userReducer
 })
+
 const rootReducer: Reducer = (state, action) => {
   switch (action.type) {
     case 'logout':

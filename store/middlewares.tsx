@@ -35,7 +35,7 @@ export const activityManager = ({ dispatch, getState }: AppThunk) => (next: Disp
   return next(action)
 }
 
-export const localStorageManager = ({ getState }: AppThunk) => (next: Dispatch) => (action: AnyAction) => {
+export const localStorageManager = ({ getState, dispatch }: AppThunk) => (next: Dispatch) => (action: AnyAction) => {
   const result = next(action)
   const reduxCurrentState = getState()
   actionsHandler(action, reduxCurrentState)

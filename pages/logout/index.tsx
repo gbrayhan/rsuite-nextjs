@@ -17,7 +17,11 @@ const Logout = (): React.ReactElement => {
       void router.push('/sign-in').then()
     }
   })
-  return (<h3 style={{ margin: '1rem' }}>Logout...</h3>)
+  return (
+      <div>
+        <h3 style={{ margin: '1rem' }}>Logout...</h3>)
+      </div>
+  )
 }
 
 export default Logout

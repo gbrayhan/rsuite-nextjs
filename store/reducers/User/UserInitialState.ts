@@ -24,7 +24,8 @@ export const initialState: UserState = {
     data: {
       token: '',
       refreshToken: '',
-      timeDurationTokenMiliSeconds: 0,
+      expirationRefreshDateTime: '',
+      expirationAccessDateTime: '',
       generatedDateToken: undefined,
       isAuthenticated: false
     },

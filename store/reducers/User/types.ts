@@ -16,7 +16,8 @@ export interface UserActivity {
 export interface UserAuth {
   token: string
   refreshToken: string
-  timeDurationTokenMiliSeconds: number
+  expirationAccessDateTime: string
+  expirationRefreshDateTime: string
   generatedDateToken?: Date
   isAuthenticated: boolean
 }

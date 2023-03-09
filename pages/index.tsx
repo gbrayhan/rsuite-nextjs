@@ -1,17 +1,15 @@
-import { useRouter } from 'next/router'
-import { useSelector } from 'react-redux'
-import { type RootState } from '@/store/store'
+import React, { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import RedirectPage from '@/components/RedirectPage'
 
-export default function Main (): void {
-  const user = useSelector((state: RootState) => state.user)
+export default function Main (): React.ReactElement {
   const router = useRouter()
 
   useEffect(() => {
-    if (user?.information?.data?.isAuthenticated === true) {
-      void router.push('/home').then()
-    } else {
-      void router.push('/sign-in').then()
-    }
+    void router.push('/home').then()
   })
+
+  return (
+      <RedirectPage />
+  )
 }

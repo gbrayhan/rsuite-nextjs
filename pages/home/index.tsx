@@ -1,4 +1,4 @@
-import { Container } from 'rsuite'
+import { Container, Loader } from 'rsuite'
 import React from 'react'
 import Sidepanel from '@/components/Sidepanel'
 import Dashboard from '@/containers/Dashboard'
@@ -14,7 +14,7 @@ const containers: ContainerMap = {
 
 const Home = (): React.ReactElement => {
   const [activeKey, setActiveKey] = React.useState<string>('dashboard')
-  useIsAuth()
+  const { loadingAuth } = useIsAuth()
 
   const renderContainer = React.useCallback((containerSelected: string): JSX.Element => {
     const ContainerComponent = containers[containerSelected]
@@ -23,12 +23,14 @@ const Home = (): React.ReactElement => {
     return <ContainerComponent/>
   }, [])
 
-  return (<div className="show-fake-browser sidebar-page">
-        <Container>
-            <Sidepanel activeKey={activeKey} setActiveKey={setActiveKey}/>
-            {renderContainer(activeKey)}
-        </Container>
-    </div>)
+  return (
+        <div className="show-fake-browser sidebar-page">
+            <Container>
+                <Sidepanel activeKey={activeKey} setActiveKey={setActiveKey}/>
+                {renderContainer(activeKey)}
+            </Container>
+            {(Boolean(loadingAuth)) && <Loader backdrop center size="lg" content="loading" vertical/>}
+        </div>)
 }
 
 export default Home
